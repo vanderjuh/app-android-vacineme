@@ -1,39 +1,39 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
 import java.util.Date;
 
-public class Registro {
+public class Register {
 
-    private Vacina vacina;
-    private Pessoa pessoa;
+    private Vaccine vaccine;
+    private Person person;
     private Date dataVacina;
     private Date dataProxVacina;
     private int imagem;
 
-    public Registro(){}
+    public Register(){}
 
-    public Registro(Vacina vacina, Pessoa pessoa, Date dataVacina, Date dataProxVacina, int imagem) {
-        this.vacina = vacina;
-        this.pessoa = pessoa;
+    public Register(Vaccine vaccine, Person person, Date dataVacina, Date dataProxVacina, int imagem) {
+        this.vaccine = vaccine;
+        this.person = person;
         this.dataVacina = dataVacina;
         this.dataProxVacina = dataProxVacina;
         this.imagem = imagem;
     }
 
-    public Vacina getVacina() {
-        return vacina;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setVacina(Vacina vacina) {
-        this.vacina = vacina;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Date getDataVacina() {

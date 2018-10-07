@@ -1,4 +1,4 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,14 +25,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.PeopleSpinnerAdapter;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Register;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+
 public class MainActivity extends AppCompatActivity {
 
-    private List<Registro> registros;
-    private List<Pessoa> pessoas;
-    private List<Vacina> vacinas;
+    private static List<Register> registers;
+    private static List<Person> people;
+    private static List<Vaccine> vaccines;
     private ListView listViewRegistros;
     private Spinner spinnerPessoas;
-    private PessoasAdapter pessoasAdapter;
+    private static PeopleSpinnerAdapter pessoasAdapter;
     private static final int ACTIVITY_PESSOA_R = 1;
     private static final int ACTIVITY_VACINA_R = 2;
 
@@ -45,29 +52,29 @@ public class MainActivity extends AppCompatActivity {
         spinnerPessoas = findViewById(R.id.spinnerPessoas);
         listViewRegistros = findViewById(R.id.listViewRegistros);
 
-        pessoas = new ArrayList<>();
-        registros = new ArrayList<>();
-        vacinas = new ArrayList<>();
+        people = new ArrayList<>();
+        registers = new ArrayList<>();
+        vaccines = new ArrayList<>();
 
         popularSpinnerPessoas();
         popularListViewRegistros();
     }
 
     private void popularSpinnerPessoas(){
-        pessoasAdapter = new PessoasAdapter(this, pessoas);
+        pessoasAdapter = new PeopleSpinnerAdapter(this, people);
         spinnerPessoas.setAdapter(pessoasAdapter);
     }
 
     private void popularListViewRegistros() {
         try {
             for(int i=0;i<4;i++){
-                registros.add(new Registro(
-                        new Vacina("Gripe", "Lote", "Laboratorio"),
-                        new Pessoa(
+                registers.add(new Register(
+                        new Vaccine("Gripe", "Lote", "Laboratorio"),
+                        new Person(
                                 "Vanderley",
                                 new Date(System.currentTimeMillis()),
                                 "Masculino",
-                                new Parentesco("Pai")
+                                new Relationship("Pai")
                         ),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse("21/09/2018"),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse("21/09/2018"),
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        RegistrosAdapter registrosAdapter = new RegistrosAdapter(this, registros);
+        RegistrosAdapter registrosAdapter = new RegistrosAdapter(this, registers);
         listViewRegistros.setAdapter(registrosAdapter);
     }
 
@@ -90,19 +97,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intentMenu;
-        ArrayList<Pessoa> listaPessoas = (ArrayList<Pessoa>) pessoas;
+        ArrayList<Person> listaPeople = (ArrayList<Person>) people;
         switch (item.getItemId()) {
-            case R.id.exibirPessoas:
-                intentMenu = new Intent(this, PessoasActivity.class);
-                intentMenu.putParcelableArrayListExtra("PESSOAS", listaPessoas);
+            case R.id.menuItemPessoas:
+                intentMenu = new Intent(this, PeopleActivity.class);
+                intentMenu.putParcelableArrayListExtra("PESSOAS", listaPeople);
                 startActivityForResult(intentMenu, ACTIVITY_PESSOA_R);
                 return true;
-            case R.id.tiposVacinas:
-                intentMenu = new Intent(this, VacinasActivity.class);
+            case R.id.menuItemVacinas:
+                intentMenu = new Intent(this, VaccinesActivity.class);
                 startActivityForResult(intentMenu, ACTIVITY_VACINA_R);
                 return true;
             case R.id.menuItemSobre:
-                intentMenu = new Intent(this, SobreActivity.class);
+                intentMenu = new Intent(this, AboutActivity.class);
                 startActivity(intentMenu);
                 return true;
             default:
@@ -114,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ACTIVITY_PESSOA_R) {
             if (resultCode == RESULT_OK) {
-                Pessoa p = data.getParcelableExtra("PESSOA");
-                p.getParentesco().setIcon(recuperarIconeParentesco(p.getParentesco().getDescricao()));
-                pessoas.add(p);
+                Person p = data.getParcelableExtra("PESSOA");
+                p.getRelationship().setIcon(recuperarIconeParentesco(p.getRelationship().getDescricao()));
+                people.add(p);
                 pessoasAdapter.notifyDataSetChanged();
             }
         }
@@ -124,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Drawable recuperarIconeParentesco(String parentesco){
         int posicao = -1;
-        String[] valores = getResources().getStringArray(R.array.parentesco);
+        String[] valores = getResources().getStringArray(R.array.relationship);
         for(int i =0;i<valores.length;i++){
             if(valores[i].equalsIgnoreCase(parentesco)){
                 posicao = i;
@@ -138,33 +145,49 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public class RegistrosAdapter extends ArrayAdapter<Registro>{
+    public class RegistrosAdapter extends ArrayAdapter<Register>{
 
         private Context context;
-        private List<Registro> registros;
+        private List<Register> registers;
 
-        RegistrosAdapter(Context c, List<Registro> registros){
-            super(c, R.layout.linha_main_listview, R.id.textViewNomeVacina, registros);
+        RegistrosAdapter(Context c, List<Register> registers){
+            super(c, R.layout.item_main_listview, R.id.textViewNomeVacina, registers);
             this.context = c;
-            this.registros = registros;
+            this.registers = registers;
         }
 
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = layoutInflater.inflate(R.layout.linha_main_listview, parent, false);
+            View row = layoutInflater.inflate(R.layout.item_main_listview, parent, false);
             ImageView imagem = row.findViewById(R.id.imageViewRegistro);
             TextView titulo = row.findViewById(R.id.textViewNomeVacina);
             TextView dataVacinacao = row.findViewById(R.id.textViewDataVacinacao);
             TextView dataProxDose = row.findViewById(R.id.textViewDataProxDose);
 
-            imagem.setImageResource(this.registros.get(position).getImagem());
-            titulo.setText(this.registros.get(position).getVacina().getDescricao().toUpperCase());
-            dataVacinacao.setText(dataVacinacao.getText().toString()+" "+new SimpleDateFormat(getString(R.string.formato_data)).format(this.registros.get(position).getDataVacina()).toString());
-            dataProxDose.setText(dataProxDose.getText().toString()+" "+new SimpleDateFormat(getString(R.string.formato_data)).format(this.registros.get(position).getDataProxVacina()).toString());
+            imagem.setImageResource(this.registers.get(position).getImagem());
+            titulo.setText(this.registers.get(position).getVaccine().getDescricao().toUpperCase());
+            dataVacinacao.setText(dataVacinacao.getText().toString()+" "+new SimpleDateFormat(getString(R.string.formato_data)).format(this.registers.get(position).getDataVacina()).toString());
+            dataProxDose.setText(dataProxDose.getText().toString()+" "+new SimpleDateFormat(getString(R.string.formato_data)).format(this.registers.get(position).getDataProxVacina()).toString());
             return row;
         }
     }
 
+    public static void addNovaPessoa(Person p){
+        people.add(p);
+        pessoasAdapter.notifyDataSetChanged();
+    }
+
+    public static List<Register> getRegisters() {
+        return registers;
+    }
+
+    public static List<Person> getPeople() {
+        return people;
+    }
+
+    public static List<Vaccine> getVaccines() {
+        return vaccines;
+    }
 }

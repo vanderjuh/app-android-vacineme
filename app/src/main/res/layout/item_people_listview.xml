@@ -9,10 +9,9 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/imageViewRegistro"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
+        android:id="@+id/imageViewIconRelationship"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -22,30 +21,38 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewNomeVacina"
+            android:id="@+id/textViewPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Nome da vacina"
+            android:text="@string/nome_da_pessoa"
             android:textColor="#000"
             android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDataVacinacao"
+            android:id="@+id/textViewPersonDateOfBorn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/aplicado_em"
+            android:text="@string/data_de_nascimento"
             android:textColor="#333" />
 
         <TextView
-            android:id="@+id/textViewDataProxDose"
+            android:id="@+id/textViewGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/proxima_dose_em"
+            android:text="@string/genero"
             android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/textViewRelationship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/parentesco2"
+            android:textColor="#000" />
 
     </LinearLayout>
 </LinearLayout>

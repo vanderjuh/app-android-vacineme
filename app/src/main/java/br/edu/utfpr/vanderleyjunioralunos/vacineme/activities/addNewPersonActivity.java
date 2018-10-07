@@ -1,17 +1,13 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,9 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-public class PessoasActivity extends AppCompatActivity {
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.RelationshitSpinnerAdapter;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+
+public class addNewPersonActivity extends AppCompatActivity {
 
     private TextView nome;
     private RadioGroup genero;
@@ -32,15 +32,12 @@ public class PessoasActivity extends AppCompatActivity {
     private DatePickerDialog dpdNascimento;
     private TextView dataNascimento;
     private Calendar calendario;
-    private ListView listViewPessoas;
-    private List<Pessoa> listaPessoas;
-    private PessoasListViewAdapter pessoasAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pessoas);
-        setTitle(getString(R.string.pessoas));
+        setContentView(R.layout.activity_add_new_person);
+        setTitle(getString(R.string.inserir_uma_nova_pessoa));
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -51,12 +48,6 @@ public class PessoasActivity extends AppCompatActivity {
         dataNascimento = findViewById(R.id.editTextNascimento);
         genero = findViewById(R.id.radioGroupGenero);
         spinnerParentesco = findViewById(R.id.spinnerParentesco);
-        listViewPessoas = findViewById(R.id.listViewPessoas);
-
-        Intent intent = getIntent();
-        listaPessoas = intent.getParcelableArrayListExtra("PESSOAS");
-        pessoasAdapter = new PessoasListViewAdapter(this, listaPessoas);
-        listViewPessoas.setAdapter(pessoasAdapter);
 
         popularSpinnerParentesco();
         datePickerEvent();
@@ -70,7 +61,7 @@ public class PessoasActivity extends AppCompatActivity {
                 int dia = calendario.get(Calendar.DAY_OF_MONTH);
                 int mes = calendario.get(Calendar.MONTH);
                 int ano = calendario.get(Calendar.YEAR);
-                dpdNascimento = new DatePickerDialog(PessoasActivity.this, new DatePickerDialog.OnDateSetListener() {
+                dpdNascimento = new DatePickerDialog(addNewPersonActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int dayOfMonth) {
                         dataNascimento.setText(formatarData(dayOfMonth, mMonth, mYear));
@@ -79,27 +70,6 @@ public class PessoasActivity extends AppCompatActivity {
                 dpdNascimento.show();
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        Intent intentMenu;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            case R.id.itemMenuCadPessoa:
-                intentMenu = new Intent(this, CadastrarPessoaActivity.class);
-                startActivity(intentMenu);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.pessoa_menu, menu);
-        return true;
     }
 
     private String formatarData(int dia, int mes, int ano) {
@@ -130,16 +100,16 @@ public class PessoasActivity extends AppCompatActivity {
     }
 
     private void popularSpinnerParentesco() {
-        String[] descs = getResources().getStringArray(R.array.parentesco);
+        String[] descs = getResources().getStringArray(R.array.relationship);
         TypedArray icons = getResources().obtainTypedArray(R.array.icones_parentesco);
 
-        ArrayList<Parentesco> parentescos = new ArrayList();
+        ArrayList<Relationship> relationships = new ArrayList();
 
         for (int cont = 0; cont < descs.length; cont++) {
-            parentescos.add(new Parentesco(descs[cont], icons.getDrawable(cont)));
+            relationships.add(new Relationship(descs[cont], icons.getDrawable(cont)));
         }
 
-        ParentescoAdapter paisAdapter = new ParentescoAdapter(this, parentescos);
+        RelationshitSpinnerAdapter paisAdapter = new RelationshitSpinnerAdapter(this, relationships);
 
         spinnerParentesco.setAdapter(paisAdapter);
     }
@@ -164,19 +134,16 @@ public class PessoasActivity extends AppCompatActivity {
     public void salvar(View view) {
         if (verificarFormulario()) {
             try {
-                Pessoa p = new Pessoa(
+                Person p = new Person(
                         nome.getText().toString(),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse(dataNascimento.getText().toString()),
                         getGeneroSelecionado(genero.getCheckedRadioButtonId()),
-                        (Parentesco) spinnerParentesco.getSelectedItem()
+                        (Relationship) spinnerParentesco.getSelectedItem()
                 );
-                listaPessoas.add(p);
-                pessoasAdapter.notifyDataSetChanged();
-                Intent intent = new Intent();
-                intent.putExtra("PESSOA", p);
-                setResult(RESULT_OK, intent);
+                MainActivity.addNovaPessoa(p);
                 Toast.makeText(this, R.string.pessoa_cadastrada_sucesso, Toast.LENGTH_SHORT).show();
-                limparCampos();
+                PeopleActivity.updateListView();
+                this.finish();
             } catch (ParseException e) {
                 Toast.makeText(this, R.string.verifique_a_data_de_nascimento, Toast.LENGTH_SHORT).show();
             }
@@ -203,4 +170,14 @@ public class PessoasActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
 }

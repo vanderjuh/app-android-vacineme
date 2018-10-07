@@ -1,4 +1,4 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -6,37 +6,35 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Parentesco implements Parcelable {
+public class Relationship implements Parcelable {
 
     private String descricao;
     private Drawable icon;
 
-    public Parentesco(String descricao) {
+    public Relationship(String descricao) {
         this.descricao = descricao;
     }
 
-    public Parentesco(String descricao, Drawable icon) {
+    public Relationship(String descricao, Drawable icon) {
         this.descricao = descricao;
         this.icon = icon;
-        //Temporario.iconCopy = icon;
     }
 
-    public Parentesco(Parcel in){
+    public Relationship(Parcel in){
         this.descricao = in.readString();
         Bitmap bitmap = (Bitmap)in.readParcelable(getClass().getClassLoader());
         this.icon = new BitmapDrawable(bitmap);
-        //Temporario.iconCopy = this.icon;
     }
 
-    public static final Creator<Parentesco> CREATOR = new Creator<Parentesco>() {
+    public static final Creator<Relationship> CREATOR = new Creator<Relationship>() {
         @Override
-        public Parentesco createFromParcel(Parcel in) {
-            return new Parentesco(in);
+        public Relationship createFromParcel(Parcel in) {
+            return new Relationship(in);
         }
 
         @Override
-        public Parentesco[] newArray(int size) {
-            return new Parentesco[size];
+        public Relationship[] newArray(int size) {
+            return new Relationship[size];
         }
     };
 

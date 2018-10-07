@@ -1,25 +1,28 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VacinasActivity extends AppCompatActivity {
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.VaccinesListViewAdapter;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
 
-    private final List<Vacina> VACINAS = new ArrayList<>();
+public class VaccinesActivity extends AppCompatActivity {
+
+    private final List<Vaccine> Vaccines = new ArrayList<>();
     private ListView listViewVacinas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vacinas);
-        setTitle(getString(R.string.vacinas));
+        setContentView(R.layout.activity_vaccines);
+        setTitle(getString(R.string.vaccines));
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!=null){
@@ -32,27 +35,27 @@ public class VacinasActivity extends AppCompatActivity {
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.vacina_menu, menu);
+        getMenuInflater().inflate(R.menu.vaccines_menu, menu);
         return true;
     }*/
 
     private void popularListaVacinas(){
-        VACINAS.add(new Vacina(
-                "Vacina teste",
+        Vaccines.add(new Vaccine(
+                "Vaccine teste",
                 " 234",
                 "Testefab"
         ));
-        VACINAS.add(new Vacina(
-                "Vacina teste",
+        Vaccines.add(new Vaccine(
+                "Vaccine teste",
                 " 234",
                 "Testefab"
         ));
-        VACINAS.add(new Vacina(
-                "Vacina teste",
+        Vaccines.add(new Vaccine(
+                "Vaccine teste",
                 " 234",
                 "Testefab"
         ));
-        VacinasListViewAdapter vacinasListViewAdapter = new VacinasListViewAdapter(this, VACINAS);
+        VaccinesListViewAdapter vacinasListViewAdapter = new VaccinesListViewAdapter(this, Vaccines);
         listViewVacinas.setAdapter(vacinasListViewAdapter);
     }
 

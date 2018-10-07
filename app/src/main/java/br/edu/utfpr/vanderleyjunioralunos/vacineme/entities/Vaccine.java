@@ -1,14 +1,14 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
-public class Vacina {
+public class Vaccine {
 
     private String descricao;
     private String lote;
     private String laboratorio;
 
-    public Vacina() {}
+    public Vaccine() {}
 
-    public Vacina(String descricao, String lote, String laboratorio) {
+    public Vaccine(String descricao, String lote, String laboratorio) {
         this.descricao = descricao;
         this.lote = lote;
         this.laboratorio = laboratorio;

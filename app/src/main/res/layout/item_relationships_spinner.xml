@@ -5,13 +5,13 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/imageViewParentesco"
+        android:id="@+id/imageViewRelationship"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp" />
 
     <TextView
-        android:id="@+id/textViewNome"
+        android:id="@+id/textViewName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

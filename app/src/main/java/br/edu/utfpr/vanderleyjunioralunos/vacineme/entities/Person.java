@@ -1,42 +1,42 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
 
-public class Pessoa implements Parcelable {
+public class Person implements Parcelable {
 
     private String nome;
     private Date nascimento;
     private String genero;
-    private Parentesco parentesco;
+    private Relationship relationship;
 
-    public Pessoa() {}
+    public Person() {}
 
-    public Pessoa(Parcel in){
+    public Person(Parcel in){
         this.nome = in.readString();
         this.nascimento = (Date)in.readValue(getClass().getClassLoader());
         this.genero = in.readString();
-        this.parentesco = (Parentesco)in.readValue(getClass().getClassLoader());
+        this.relationship = (Relationship)in.readValue(getClass().getClassLoader());
     }
 
-    public Pessoa(String nome, Date nascimento, String genero, Parentesco parentesco) {
+    public Person(String nome, Date nascimento, String genero, Relationship relationship) {
         this.nome = nome;
         this.nascimento = nascimento;
         this.genero = genero;
-        this.parentesco = parentesco;
+        this.relationship = relationship;
     }
 
-    public static final Creator<Pessoa> CREATOR = new Creator<Pessoa>() {
+    public static final Creator<Person> CREATOR = new Creator<Person>() {
         @Override
-        public Pessoa createFromParcel(Parcel in) {
-            return new Pessoa(in);
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
         }
 
         @Override
-        public Pessoa[] newArray(int size) {
-            return new Pessoa[size];
+        public Person[] newArray(int size) {
+            return new Person[size];
         }
     };
 
@@ -64,12 +64,12 @@ public class Pessoa implements Parcelable {
         this.genero = genero;
     }
 
-    public Parentesco getParentesco() {
-        return parentesco;
+    public Relationship getRelationship() {
+        return relationship;
     }
 
-    public void setParentesco(Parentesco parentesco) {
-        this.parentesco = parentesco;
+    public void setRelationship(Relationship relationship) {
+        this.relationship = relationship;
     }
 
     @Override
@@ -87,6 +87,6 @@ public class Pessoa implements Parcelable {
         dest.writeString(this.nome);
         dest.writeValue(this.nascimento);
         dest.writeString(this.genero);
-        dest.writeValue(this.parentesco);
+        dest.writeValue(this.relationship);
     }
 }

@@ -9,7 +9,7 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/imageViewVacina"
+        android:id="@+id/imageViewVaccine"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="4dp"
@@ -22,17 +22,17 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewNomeVacina"
+            android:id="@+id/textViewVaccineName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Nome da vacina"
+            android:text="Nome da vaccine"
             android:textColor="#000"
             android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewLaboratorio"
+            android:id="@+id/textViewLaboratory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -40,7 +40,7 @@
             android:textColor="#333" />
 
         <TextView
-            android:id="@+id/textViewLote"
+            android:id="@+id/textViewLotNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

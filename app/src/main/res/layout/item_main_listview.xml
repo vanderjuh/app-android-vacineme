@@ -9,9 +9,10 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/imageViewIconParentesco"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/imageViewRegistro"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -21,38 +22,30 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewNomePessoa"
+            android:id="@+id/textViewNomeVacina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/nome_da_pessoa"
+            android:text="Nome da vaccine"
             android:textColor="#000"
             android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDataNascimento"
+            android:id="@+id/textViewDataVacinacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/data_de_nascimento"
+            android:text="@string/aplicado_em"
             android:textColor="#333" />
 
         <TextView
-            android:id="@+id/textViewGenero"
+            android:id="@+id/textViewDataProxDose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/genero"
+            android:text="@string/proxima_dose_em"
             android:textColor="#333" />
-
-        <TextView
-            android:id="@+id/textViewParentesco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/parentesco2"
-            android:textColor="#000" />
 
     </LinearLayout>
 </LinearLayout>

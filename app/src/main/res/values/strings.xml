@@ -12,7 +12,7 @@
     <string name="genero_feminino">Female</string>
     <string name="genero_masculino">Male</string>
     <string name="concluir">Complete</string>
-    <string name="parentesco">Relationship</string>
+    <string name="relationship">Relationship</string>
     <string name="salvar_nova_pessoa">Save new person</string>
     <string name="esposo">Husband</string>
     <string name="esposa">Wife</string>
@@ -29,7 +29,7 @@
     <string name="registros_de_vacinas">Vaccine records:</string>
     <string name="apagar_pessoa">Delete person</string>
     <string name="adicionar_novo_registro">Add new record</string>
-    <string name="vacinas">Vaccines</string>
+    <string name="vaccines">Vaccines</string>
     <string name="vacinas2">Vaccines:</string>
     <string name="tipos_de_vacinas">Kind of vaccines</string>
     <string name="lista_de_vacinas">Vaccines list:</string>
@@ -39,7 +39,7 @@
     <string name="laboratorio">Laboratory:</string>
     <string name="exibir_pessoas">Show people</string>
     <string name="lista_de_pessoas">People list:</string>
-    <string name="pessoas">People</string>
+    <string name="people">People</string>
     <string name="formato_data">yyyy/MM/dd</string>
     <string name="aplicado_em">Applied:</string>
     <string name="proxima_dose_em">Next dose:</string>
@@ -58,7 +58,7 @@
     <string name="sobre_app">Vacineme is a vaccination management application from a domestic environment, developed for the Mobile Programming course, taught by Prof. Alexandre Feitoza at the Universidade Tecnológica Federal do Paraná.</string>
     <string name="obrigado_sobre">Thanks :)</string>
 
-    <string-array name="parentesco">
+    <string-array name="relationship">
         <item>@string/esposo</item>
         <item>@string/esposa</item>
         <item>@string/filho</item>

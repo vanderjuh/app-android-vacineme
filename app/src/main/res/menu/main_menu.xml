@@ -8,14 +8,14 @@
         android:title="@string/adicionar_novo_registro"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/exibirPessoas"
+        android:id="@+id/menuItemPessoas"
         android:icon="@drawable/ic_face"
-        android:title="@string/exibir_pessoas"
+        android:title="@string/people"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/tiposVacinas"
+        android:id="@+id/menuItemVacinas"
         android:icon="@drawable/ic_baseline_colorize_24px"
-        android:title="@string/tipos_de_vacinas"
+        android:title="@string/vaccines"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemSobre"
