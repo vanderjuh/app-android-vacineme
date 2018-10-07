@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name" translatable="false">Vacineme</string>
+    <string name="bem_vindo_ao_vacineme">Welcome to Vacineme</string>
+    <string name="selecione_uma_opcao_abaixo">Select an option below:</string>
+    <string name="selecione_alguem_abaixo">Select someone below:</string>
+    <string name="adicionar_nova_pessoa">Add a person</string>
+    <string name="selecione_uma_pessoa">Select a person:</string>
+    <string name="adicionar_nova_vacina">Add new vaccine</string>
+    <string name="criado_por_autor">Made by: Vanderley :)</string>
+    <string name="inserir_nova_pessoa">Insert a new person</string>
+    <string name="genero_da_pessoa">Gender:</string>
+    <string name="genero_feminino">Female</string>
+    <string name="genero_masculino">Male</string>
+    <string name="concluir">Complete</string>
+    <string name="parentesco">Relationship</string>
+    <string name="salvar_nova_pessoa">Save new person</string>
+    <string name="esposo">Husband</string>
+    <string name="esposa">Wife</string>
+    <string name="filho">Son</string>
+    <string name="filha">Daughter</string>
+    <string name="mae">Mother</string>
+    <string name="pet">Pet</string>
+    <string name="pai">Father</string>
+    <string name="avo">Grandma</string>
+    <string name="avo_m">Grandpa</string>
+    <string name="feminino">Female</string>
+    <string name="masculino">Male</string>
+    <string name="pessoa_cadastrada_sucesso">Person successfully registered</string>
+    <string name="registros_de_vacinas">Vaccine records:</string>
+    <string name="apagar_pessoa">Delete person</string>
+    <string name="adicionar_novo_registro">Add new record</string>
+    <string name="vacinas">Vaccines</string>
+    <string name="vacinas2">Vaccines:</string>
+    <string name="tipos_de_vacinas">Kind of vaccines</string>
+    <string name="lista_de_vacinas">Vaccines list:</string>
+    <string name="descricao_da_vacina">Description of vaccine:</string>
+    <string name="lote">Lot number:</string>
+    <string name="salvar_nova_vacina">Save new vaccine</string>
+    <string name="laboratorio">Laboratory:</string>
+    <string name="exibir_pessoas">Show people</string>
+    <string name="lista_de_pessoas">People list:</string>
+    <string name="pessoas">People</string>
+    <string name="formato_data">yyyy/MM/dd</string>
+    <string name="aplicado_em">Applied:</string>
+    <string name="proxima_dose_em">Next dose:</string>
+    <string name="informe_o_nome_da_pessoa">Insert the people\'s name</string>
+    <string name="informe_a_data_de_nascimento">Insert the person\'s date of birth</string>
+    <string name="informe_o_genero_da_pessoa">Insert the person\'s gender</string>
+    <string name="informe_o_parentesco">Insert the relationship</string>
+    <string name="verifique_a_data_de_nascimento">Check the date of birth</string>
+    <string name="nome_da_pessoa">Person\'s name:</string>
+    <string name="data_de_nascimento">Person\'s date of birth:</string>
+    <string name="genero">Gender:</string>
+    <string name="parentesco2">Relationship:</string>
+    <string name="cadastre_uma_nova_pessoa">Insert a new person:</string>
+    <string name="cadastre_uma_nova_vacina">Insert a new vaccine:</string>
+    <string name="sobre">About</string>
+    <string name="sobre_app">Vacineme is a vaccination management application from a domestic environment, developed for the Mobile Programming course, taught by Prof. Alexandre Feitoza at the Universidade Tecnológica Federal do Paraná.</string>
+    <string name="obrigado_sobre">Thanks :)</string>
+
+    <string-array name="parentesco">
+        <item>@string/esposo</item>
+        <item>@string/esposa</item>
+        <item>@string/filho</item>
+        <item>@string/filha</item>
+        <item>@string/pai</item>
+        <item>@string/mae</item>
+        <item>@string/avo</item>
+        <item>@string/avo_m</item>
+        <item>@string/pet</item>
+    </string-array>
+
+    <string-array name="icones_parentesco">
+        <item>@drawable/ic_homem</item>
+        <item>@drawable/ic_mulher</item>
+        <item>@drawable/ic_menino</item>
+        <item>@drawable/ic_menina</item>
+        <item>@drawable/ic_homem</item>
+        <item>@drawable/ic_mulher</item>
+        <item>@drawable/ic_avo</item>
+        <item>@drawable/ic_avo_m</item>
+        <item>@drawable/ic_pet</item>
+    </string-array>
+    <string name="teste">teste</string>
+    <string name="inserir_uma_nova_pessoa">Insert a new person</string>
+
+</resources>
