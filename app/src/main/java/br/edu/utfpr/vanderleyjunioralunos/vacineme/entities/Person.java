@@ -7,24 +7,24 @@ import java.util.Date;
 
 public class Person implements Parcelable {
 
-    private String nome;
-    private Date nascimento;
-    private String genero;
+    private String name;
+    private Date dateOfBorn;
+    private String gender;
     private Relationship relationship;
 
     public Person() {}
 
     public Person(Parcel in){
-        this.nome = in.readString();
-        this.nascimento = (Date)in.readValue(getClass().getClassLoader());
-        this.genero = in.readString();
+        this.name = in.readString();
+        this.dateOfBorn = (Date)in.readValue(getClass().getClassLoader());
+        this.gender = in.readString();
         this.relationship = (Relationship)in.readValue(getClass().getClassLoader());
     }
 
-    public Person(String nome, Date nascimento, String genero, Relationship relationship) {
-        this.nome = nome;
-        this.nascimento = nascimento;
-        this.genero = genero;
+    public Person(String name, Date dateOfBorn, String gender, Relationship relationship) {
+        this.name = name;
+        this.dateOfBorn = dateOfBorn;
+        this.gender = gender;
         this.relationship = relationship;
     }
 
@@ -40,28 +40,28 @@ public class Person implements Parcelable {
         }
     };
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getNascimento() {
-        return nascimento;
+    public Date getDateOfBorn() {
+        return dateOfBorn;
     }
 
-    public void setNascimento(Date nascimento) {
-        this.nascimento = nascimento;
+    public void setDateOfBorn(Date dateOfBorn) {
+        this.dateOfBorn = dateOfBorn;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getGender() {
+        return gender;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Relationship getRelationship() {
@@ -74,7 +74,7 @@ public class Person implements Parcelable {
 
     @Override
     public String toString() {
-        return this.nome.toUpperCase();
+        return this.name.toUpperCase();
     }
 
     @Override
@@ -84,9 +84,9 @@ public class Person implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.nome);
-        dest.writeValue(this.nascimento);
-        dest.writeString(this.genero);
+        dest.writeString(this.name);
+        dest.writeValue(this.dateOfBorn);
+        dest.writeString(this.gender);
         dest.writeValue(this.relationship);
     }
 }

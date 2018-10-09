@@ -1,8 +1,10 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -15,8 +17,8 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
 
 public class VaccinesActivity extends AppCompatActivity {
 
-    private final List<Vaccine> Vaccines = new ArrayList<>();
-    private ListView listViewVacinas;
+    private static VaccinesListViewAdapter vaccinesListViewAdapter;
+    private ListView listViewVaccines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,45 +31,34 @@ public class VaccinesActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        listViewVacinas = findViewById(R.id.listViewVacinas);
-        popularListaVacinas();
-    }
+        listViewVaccines = findViewById(R.id.listViewVaccines);
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.vaccines_menu, menu);
-        return true;
-    }*/
-
-    private void popularListaVacinas(){
-        Vaccines.add(new Vaccine(
-                "Vaccine teste",
-                " 234",
-                "Testefab"
-        ));
-        Vaccines.add(new Vaccine(
-                "Vaccine teste",
-                " 234",
-                "Testefab"
-        ));
-        Vaccines.add(new Vaccine(
-                "Vaccine teste",
-                " 234",
-                "Testefab"
-        ));
-        VaccinesListViewAdapter vacinasListViewAdapter = new VaccinesListViewAdapter(this, Vaccines);
-        listViewVacinas.setAdapter(vacinasListViewAdapter);
+        vaccinesListViewAdapter = new VaccinesListViewAdapter(this, MainActivity.getVaccines());
+        listViewVaccines.setAdapter(vaccinesListViewAdapter);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        Intent intentMenu;
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.menuItemAddNewVaccine:
+                intentMenu = new Intent(this, AddNewVaccineActivity.class);
+                startActivity(intentMenu);
         }
         return true;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.vaccines_menu, menu);
+        return true;
+    }
+
+    public static void updateListView() {
+        vaccinesListViewAdapter.notifyDataSetChanged();
+    }
 }

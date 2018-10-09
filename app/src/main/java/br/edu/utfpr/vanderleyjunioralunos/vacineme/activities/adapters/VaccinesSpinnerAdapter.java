@@ -13,19 +13,19 @@ import java.util.List;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
 
-public class VaccinesListViewAdapter extends BaseAdapter {
+public class VaccinesSpinnerAdapter extends BaseAdapter {
 
     Context context;
     List<Vaccine> vaccines;
 
-    private static class VaccinesHolder {
+    private static class VaccineHolder {
         public ImageView imageView;
-        public TextView textViewName;
-        public TextView textViewLaboratory;
-        public TextView textViewLotNumber;
+        public TextView textViewVaccineDescription;
+        public TextView textViewVaccineLaboratory;
+        public TextView textViewVaccineLotNumber;
     }
 
-    public VaccinesListViewAdapter(Context context, List<Vaccine> vaccines) {
+    public VaccinesSpinnerAdapter(Context context, List<Vaccine> vaccines) {
 
         this.context = context;
         this.vaccines = vaccines;
@@ -49,31 +49,31 @@ public class VaccinesListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        VaccinesHolder holder;
+        VaccineHolder holder;
 
         if (view == null){
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_vaccines_listview, viewGroup, false);
+            view = inflater.inflate(R.layout.item_vaccines_spinner, viewGroup, false);
 
-            holder = new VaccinesHolder();
+            holder = new VaccineHolder();
 
             holder.imageView = view.findViewById(R.id.imageViewVaccine);
-            holder.textViewName = view.findViewById(R.id.textViewVaccineName);
-            holder.textViewLaboratory = view.findViewById(R.id.textViewLaboratory);
-            holder.textViewLotNumber = view.findViewById(R.id.textViewLotNumber);
+            holder.textViewVaccineDescription = view.findViewById(R.id.textViewVaccineName);
+            holder.textViewVaccineLaboratory = view.findViewById(R.id.textViewLaboratory);
+            holder.textViewVaccineLotNumber = view.findViewById(R.id.textViewLotNumber);
 
             view.setTag(holder);
 
         }else{
 
-            holder = (VaccinesHolder) view.getTag();
+            holder = (VaccineHolder) view.getTag();
         }
 
         holder.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_vacina));
-        holder.textViewName.setText(vaccines.get(i).toString().toUpperCase());
-        holder.textViewLaboratory.setText(context.getResources().getText(R.string.laboratorio)+" "+ vaccines.get(i).getLaboratorio());
-        holder.textViewLotNumber.setText(context.getResources().getText(R.string.lotNumber)+" "+ vaccines.get(i).getLotNumber());
+        holder.textViewVaccineDescription.setText(vaccines.get(i).getDescription().toUpperCase());
+        holder.textViewVaccineLaboratory.setText(context.getResources().getText(R.string.laboratorio)+" "+vaccines.get(i).getLaboratorio());
+        holder.textViewVaccineLotNumber.setText(context.getResources().getText(R.string.lotNumber)+" "+vaccines.get(i).getLotNumber());
 
         return view;
     }

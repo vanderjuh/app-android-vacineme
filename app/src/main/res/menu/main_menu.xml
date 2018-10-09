@@ -3,22 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/addNewRegistro"
+        android:id="@+id/addNewRegister"
         android:icon="@drawable/ic_baseline_add_24px"
         android:title="@string/adicionar_novo_registro"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menuItemPessoas"
+        android:id="@+id/menuItemPeople"
         android:icon="@drawable/ic_face"
         android:title="@string/people"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menuItemVacinas"
+        android:id="@+id/menuItemVaccines"
         android:icon="@drawable/ic_baseline_colorize_24px"
         android:title="@string/vaccines"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menuItemSobre"
+        android:id="@+id/menuItemAbout"
         android:icon="@drawable/ic_baseline_help_outline_24px"
         android:title="@string/sobre"
         app:showAsAction="ifRoom" />

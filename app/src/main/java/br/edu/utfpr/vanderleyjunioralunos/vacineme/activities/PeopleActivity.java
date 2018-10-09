@@ -13,8 +13,8 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 
 public class PeopleActivity extends AppCompatActivity {
 
-    private static ListView listViewPessoas;
-    private static PeopleListViewAdapter pessoasAdapter;
+    private static ListView listViewPeople;
+    private static PeopleListViewAdapter peopleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class PeopleActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        listViewPessoas = findViewById(R.id.listViewPessoas);
-        pessoasAdapter = new PeopleListViewAdapter(this, MainActivity.getPeople());
-        listViewPessoas.setAdapter(pessoasAdapter);
+        listViewPeople = findViewById(R.id.listViewPeople);
+        peopleAdapter = new PeopleListViewAdapter(this, MainActivity.getPeople());
+        listViewPeople.setAdapter(peopleAdapter);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class PeopleActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.itemMenuCadPessoa:
-                intentMenu = new Intent(this, addNewPersonActivity.class);
+            case R.id.itemMenuAddNewPerson:
+                intentMenu = new Intent(this, AddNewPersonActivity.class);
                 startActivity(intentMenu);
         }
         return true;
@@ -52,7 +52,7 @@ public class PeopleActivity extends AppCompatActivity {
     }
 
     public static void updateListView(){
-        pessoasAdapter.notifyDataSetChanged();
+        peopleAdapter.notifyDataSetChanged();
     }
 
 }

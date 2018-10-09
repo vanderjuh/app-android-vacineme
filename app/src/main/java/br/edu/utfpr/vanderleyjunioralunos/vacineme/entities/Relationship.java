@@ -8,20 +8,20 @@ import android.os.Parcelable;
 
 public class Relationship implements Parcelable {
 
-    private String descricao;
+    private String description;
     private Drawable icon;
 
-    public Relationship(String descricao) {
-        this.descricao = descricao;
+    public Relationship(String description) {
+        this.description = description;
     }
 
-    public Relationship(String descricao, Drawable icon) {
-        this.descricao = descricao;
+    public Relationship(String description, Drawable icon) {
+        this.description = description;
         this.icon = icon;
     }
 
     public Relationship(Parcel in){
-        this.descricao = in.readString();
+        this.description = in.readString();
         Bitmap bitmap = (Bitmap)in.readParcelable(getClass().getClassLoader());
         this.icon = new BitmapDrawable(bitmap);
     }
@@ -38,12 +38,12 @@ public class Relationship implements Parcelable {
         }
     };
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Drawable getIcon() {
@@ -61,7 +61,7 @@ public class Relationship implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.descricao);
+        dest.writeString(this.description);
         Bitmap bitmap = (Bitmap)((BitmapDrawable) this.icon).getBitmap();
         dest.writeParcelable(bitmap, flags);
     }

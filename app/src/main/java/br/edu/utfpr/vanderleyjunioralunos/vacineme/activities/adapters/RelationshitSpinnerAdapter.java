@@ -67,7 +67,7 @@ public class RelationshitSpinnerAdapter extends BaseAdapter {
         }
 
         holder.imageViewBandeira.setImageDrawable(relationships.get(i).getIcon());
-        holder.textViewName.setText(relationships.get(i).getDescricao());
+        holder.textViewName.setText(relationships.get(i).getDescription());
 
         return view;
     }

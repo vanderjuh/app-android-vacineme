@@ -2,32 +2,32 @@ package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
 public class Vaccine {
 
-    private String descricao;
-    private String lote;
+    private String description;
+    private String lotNumber;
     private String laboratorio;
 
     public Vaccine() {}
 
-    public Vaccine(String descricao, String lote, String laboratorio) {
-        this.descricao = descricao;
-        this.lote = lote;
+    public Vaccine(String description, String laboratorio, String lotNumber) {
+        this.description = description;
+        this.lotNumber = lotNumber;
         this.laboratorio = laboratorio;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getLote() {
-        return lote;
+    public String getLotNumber() {
+        return lotNumber;
     }
 
-    public void setLote(String lote) {
-        this.lote = lote;
+    public void setLotNumber(String lotNumber) {
+        this.lotNumber = lotNumber;
     }
 
     public String getLaboratorio() {
@@ -40,6 +40,6 @@ public class Vaccine {
 
     @Override
     public String toString() {
-        return this.descricao;
+        return this.description;
     }
 }

@@ -6,18 +6,18 @@ public class Register {
 
     private Vaccine vaccine;
     private Person person;
-    private Date dataVacina;
-    private Date dataProxVacina;
-    private int imagem;
+    private Date vaccineDate;
+    private Date nextDateVaccine;
+    private int iconVaccine;
 
     public Register(){}
 
-    public Register(Vaccine vaccine, Person person, Date dataVacina, Date dataProxVacina, int imagem) {
+    public Register(Vaccine vaccine, Person person, Date vaccineDate, Date nextDateVaccine, int iconVaccine) {
         this.vaccine = vaccine;
         this.person = person;
-        this.dataVacina = dataVacina;
-        this.dataProxVacina = dataProxVacina;
-        this.imagem = imagem;
+        this.vaccineDate = vaccineDate;
+        this.nextDateVaccine = nextDateVaccine;
+        this.iconVaccine = iconVaccine;
     }
 
     public Vaccine getVaccine() {
@@ -36,27 +36,27 @@ public class Register {
         this.person = person;
     }
 
-    public Date getDataVacina() {
-        return dataVacina;
+    public Date getVaccineDate() {
+        return vaccineDate;
     }
 
-    public void setDataVacina(Date dataVacina) {
-        this.dataVacina = dataVacina;
+    public void setVaccineDate(Date vaccineDate) {
+        this.vaccineDate = vaccineDate;
     }
 
-    public Date getDataProxVacina() {
-        return dataProxVacina;
+    public Date getNextDateVaccine() {
+        return nextDateVaccine;
     }
 
-    public void setDataProxVacina(Date dataProxVacina) {
-        this.dataProxVacina = dataProxVacina;
+    public void setNextDateVaccine(Date nextDateVaccine) {
+        this.nextDateVaccine = nextDateVaccine;
     }
 
-    public int getImagem() {
-        return imagem;
+    public int getIconVaccine() {
+        return iconVaccine;
     }
 
-    public void setImagem(int imagem) {
-        this.imagem = imagem;
+    public void setIconVaccine(int iconVaccine) {
+        this.iconVaccine = iconVaccine;
     }
 }
