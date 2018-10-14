@@ -1,18 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">Vacineme</string>
     <string name="welcome_to_vacineme">Welcome to Vacineme</string>
-    <string name="select_an_option_below">Select an option below:</string>
-    <string name="select_someone_below">Select someone below:</string>
-    <string name="addANewPerson">Add a new person</string>
     <string name="select_a_person">Select a person:</string>
     <string name="add_a_new_vaccine">Add a new vaccine</string>
     <string name="made_by_vanderley">Made by: Vanderley :)</string>
-    <string name="inserir_nova_pessoa">Insert a new person</string>
-    <string name="genero_da_pessoa">Gender:</string>
     <string name="genero_feminino">Female</string>
     <string name="genero_masculino">Male</string>
-    <string name="concluir">Complete</string>
-    <string name="relationship">Relationship</string>
     <string name="salvar_nova_pessoa">Save new person</string>
     <string name="esposo">Husband</string>
     <string name="esposa">Wife</string>
@@ -26,19 +19,12 @@
     <string name="feminino">Female</string>
     <string name="masculino">Male</string>
     <string name="pessoa_cadastrada_sucesso">Person successfully registered</string>
-    <string name="registros_de_vacinas">Vaccine records:</string>
-    <string name="apagar_pessoa">Delete person</string>
+    <string name="registros_de_vacinas">Vaccine registers:</string>
     <string name="adicionar_novo_registro">Add new record</string>
     <string name="vaccines">Vaccines</string>
-    <string name="vacinas2">Vaccines:</string>
-    <string name="tipos_de_vacinas">Kind of vaccines</string>
-    <string name="lista_de_vacinas">Vaccines list:</string>
-    <string name="descricao_da_vacina">Description of vaccine:</string>
     <string name="lotNumber">Lot number:</string>
     <string name="salvar_nova_vacina">Save new vaccine</string>
     <string name="laboratorio">Laboratory:</string>
-    <string name="exibir_pessoas">Show vaccines</string>
-    <string name="lista_de_pessoas">People list:</string>
     <string name="formato_data">yyyy/MM/dd</string>
     <string name="aplicado_em">Applied:</string>
     <string name="proxima_dose_em">Next dose:</string>
@@ -51,11 +37,8 @@
     <string name="data_de_nascimento">Person\'s date of birth:</string>
     <string name="gender">Gender:</string>
     <string name="parentesco2">Relationship:</string>
-    <string name="cadastre_uma_nova_pessoa">Insert a new person:</string>
-    <string name="cadastre_uma_nova_vacina">Insert a new vaccine:</string>
     <string name="sobre">About</string>
     <string name="sobre_app">Vacineme is a vaccination management application from a domestic environment, developed for the Mobile Programming course, taught by Prof. Alexandre Feitoza at the Universidade Tecnológica Federal do Paraná.</string>
-    <string name="obrigado_sobre">Thanks :)</string>
 
     <string-array name="relationship">
         <item>@string/esposo</item>
@@ -80,18 +63,14 @@
         <item>@drawable/ic_avo_m</item>
         <item>@drawable/ic_pet</item>
     </string-array>
-    <string name="teste">teste</string>
     <string name="inserir_uma_nova_pessoa">Insert a new person</string>
     <string name="vaccine_name">Vaccine\'s name</string>
     <string name="about_vacineme">About Vacineme</string>
-    <string name="vaccine_name_form">Vaccine\'s name:</string>
     <string name="laboratory_name_form">Laboratory\'s name:</string>
     <string name="lot_number_form">Lot\'s number:</string>
     <string name="vaccine_description_form">Vaccine\'s description:</string>
     <string name="vaccine_successfully_registered">Vaccine successfully registered</string>
     <string name="insert_the_vaccine_description">Insert the vaccine\'s description</string>
-    <string name="insert_the_vaccine_laboratory">Insert the vaccine\'s laboratory</string>
-    <string name="insert_the_vaccine_lot_number">Insert the vaccine\'s lot number</string>
     <string name="add_new_register">Add new register</string>
     <string name="save_new_register">Save new register</string>
     <string name="select_a_person_form">Select a person:</string>
@@ -100,5 +79,19 @@
     <string name="date_next_application_form">Date of next application:</string>
     <string name="people">People</string>
     <string name="you_need_to_add_a_person_and_a_vaccine_before">You need to add a person and a vaccine before</string>
+    <string name="you_need_to_select_a_person">You need to select a person</string>
+    <string name="you_need_to_select_a_vaccine">You need to select a vaccine</string>
+    <string name="inform_the_date_of_application">Inform the date of application</string>
+    <string name="register_successfully_registered">Register successfully registered</string>
+    <string name="nothing_selected">Nothing selected</string>
+    <string name="delete_item">Delete item</string>
+    <string name="delete">Delete</string>
+    <string name="inform_the_date_of_next_application">Inform the date of next application</string>
+    <string name="choose_an_option">Choose an option:</string>
+    <string name="change">Change</string>
+    <string name="successfully_deleted">Successfully deleted</string>
+    <string name="edit_person">Edit person</string>
+    <string name="no_people_found">No people found</string>
+    <string name="save_changes">Save changes</string>
 
 </resources>

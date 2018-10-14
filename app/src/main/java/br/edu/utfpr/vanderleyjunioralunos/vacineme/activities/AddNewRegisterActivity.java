@@ -9,12 +9,18 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.PeopleSpinnerAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.VaccinesSpinnerAdapter;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Register;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.DateUtil;
 
 public class AddNewRegisterActivity extends AppCompatActivity {
@@ -67,6 +73,45 @@ public class AddNewRegisterActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    public void saveNewRegister(View view){
+        if(verifyForm()){
+            try {
+                Register register = new Register(
+                        (Vaccine)vaccines.getSelectedItem(),
+                        (Person)people.getSelectedItem(),
+                        new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfApplication.getText().toString()),
+                        new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfNextApplication.getText().toString()),
+                        R.drawable.ic_vacina
+                );
+                Toast.makeText(this, R.string.register_successfully_registered, Toast.LENGTH_SHORT).show();
+                MainActivity.addNewRegister(register);
+                this.finish();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean verifyForm(){
+        if(people.isSelected()){
+            Toast.makeText(this, R.string.you_need_to_select_a_person, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(vaccines.isSelected()){
+            Toast.makeText(this, R.string.you_need_to_select_a_vaccine, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(dateOfApplication.getText().toString().isEmpty()){
+            Toast.makeText(this, R.string.inform_the_date_of_application, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(dateOfNextApplication.getText().toString().isEmpty()){
+            Toast.makeText(this, R.string.inform_the_date_of_next_application, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override

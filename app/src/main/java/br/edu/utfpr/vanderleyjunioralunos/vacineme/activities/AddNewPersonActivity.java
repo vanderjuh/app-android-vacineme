@@ -1,13 +1,17 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,13 +35,13 @@ public class AddNewPersonActivity extends AppCompatActivity {
     private Spinner spinnerRelationship;
     private DatePickerDialog datePickerDialog;
     private TextView dateOfBorn;
+    private Button button;
     private Calendar calendar;
-
+    private int ITEM_POSITION;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_person);
-        setTitle(getString(R.string.inserir_uma_nova_pessoa));
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -48,9 +52,53 @@ public class AddNewPersonActivity extends AppCompatActivity {
         dateOfBorn = findViewById(R.id.editTextDateOfBorn);
         genrer = findViewById(R.id.radioGroupGender);
         spinnerRelationship = findViewById(R.id.spinnerRelationship);
+        button = findViewById(R.id.buttonAction);
 
         insertDataSpinnerRelationship();
         datePickerEvent();
+
+        if(!verifyIntentMode(getIntent())){
+            setTitle(getString(R.string.inserir_uma_nova_pessoa));
+        }
+    }
+
+    private boolean verifyIntentMode(Intent intent){
+        Bundle bundle = intent.getExtras();
+        if(bundle!=null){
+            setTitle(getString(R.string.edit_person));
+            button.setText(R.string.save_changes);
+            ITEM_POSITION = bundle.getInt("ITEM_POSITION");
+            setValuesForm(MainActivity.getPeople().get(ITEM_POSITION));
+            return true;
+        }
+        return false;
+    }
+
+    private void setValuesForm(Person p){
+        if(p!=null){
+            name.setText(p.getName());
+            dateOfBorn.setText(new SimpleDateFormat(getString(R.string.formato_data)).format(p.getDateOfBorn()));
+            RadioButton f = (RadioButton) genrer.getChildAt(0);
+            RadioButton m = (RadioButton) genrer.getChildAt(1);
+            if(p.getGender().equalsIgnoreCase(getString(R.string.genero_feminino))){
+                f.setChecked(true);
+            } else {
+                m.setChecked(true);
+            }
+            spinnerRelationship.setSelection(findRelationshipPosition(p.getRelationship()));
+        } else {
+            Toast.makeText(this, R.string.no_people_found, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private int findRelationshipPosition(Relationship r){
+        String[] rs = getResources().getStringArray(R.array.relationship);
+        for(int i=0;i<rs.length;i++){
+            if(rs[i].equalsIgnoreCase(r.getDescription())){
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void datePickerEvent() {
@@ -106,8 +154,15 @@ public class AddNewPersonActivity extends AppCompatActivity {
                         getSelectedGender(genrer.getCheckedRadioButtonId()),
                         (Relationship) spinnerRelationship.getSelectedItem()
                 );
-                MainActivity.addNewPerson(p);
-                Toast.makeText(this, R.string.pessoa_cadastrada_sucesso, Toast.LENGTH_SHORT).show();
+                if(!button.getText().toString().equalsIgnoreCase(getString(R.string.save_changes))){
+                    MainActivity.addNewPerson(p);
+                } else {
+                    MainActivity.getPeople().get(ITEM_POSITION).setName(name.getText().toString());
+                    MainActivity.getPeople().get(ITEM_POSITION).setDateOfBorn(new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()));
+                    MainActivity.getPeople().get(ITEM_POSITION).setGender(getSelectedGender(genrer.getCheckedRadioButtonId()));
+                    MainActivity.getPeople().get(ITEM_POSITION).setRelationship((Relationship) spinnerRelationship.getSelectedItem());
+                    MainActivity.updateSpinnerPeople();
+                }
                 PeopleActivity.updateListView();
                 this.finish();
             } catch (ParseException e) {

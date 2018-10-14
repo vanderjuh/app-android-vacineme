@@ -114,6 +114,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/colorPrimary"
+        android:onClick="saveNewRegister"
         android:text="@string/save_new_register"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"

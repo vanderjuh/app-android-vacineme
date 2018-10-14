@@ -1,18 +1,11 @@
 <resources>
     <string name="welcome_to_vacineme">Bem-vindo ao Vacineme</string>
-<string name="select_an_option_below">Selecione uma opção abaixo:</string>
-<string name="select_someone_below">Selecione alguém abaixo:</string>
-<string name="addANewPerson">Adicionar nova pessoa</string>
-<string name="select_a_person">Selecione uma person:</string>
+    <string name="select_a_person">Selecione uma pessoa:</string>
 <string name="add_a_new_vaccine">Adicionar nova vaccine</string>
 <string name="made_by_vanderley">Criado por: Vanderley :)</string>
-<string name="inserir_nova_pessoa">Inserir nova person</string>
-<string name="genero_da_pessoa">Gênero:</string>
-<string name="genero_feminino">Feminino</string>
+    <string name="genero_feminino">Feminino</string>
 <string name="genero_masculino">Masculino</string>
-<string name="concluir">Concluir</string>
-<string name="relationship">Parentesco</string>
-<string name="salvar_nova_pessoa">Salvar nova person</string>
+    <string name="salvar_nova_pessoa">Salvar nova person</string>
 <string name="esposo">Esposo</string>
 <string name="esposa">Esposa</string>
 <string name="filho">Filho</string>
@@ -25,20 +18,13 @@
 <string name="feminino">Feminino</string>
 <string name="masculino">Masculino</string>
 <string name="pessoa_cadastrada_sucesso">Pessoa cadastrada com sucesso</string>
-<string name="registros_de_vacinas">Registros de vaccines:</string>
-<string name="apagar_pessoa">Apagar person</string>
-<string name="adicionar_novo_registro">Adicionar novo registro</string>
+<string name="registros_de_vacinas">Registros de vacinas:</string>
+    <string name="adicionar_novo_registro">Adicionar novo registro</string>
 <string name="vaccines">Vacinas</string>
-<string name="vacinas2">Vacinas:</string>
-<string name="tipos_de_vacinas">Tipos de vaccines</string>
-<string name="lista_de_vacinas">Lista de vaccines:</string>
-<string name="descricao_da_vacina">Descrição da vaccine:</string>
-<string name="lotNumber">Lote:</string>
+    <string name="lotNumber">Lote:</string>
 <string name="salvar_nova_vacina">Salvar nova vaccine</string>
 <string name="laboratorio">Laboratório:</string>
-<string name="exibir_pessoas">Exibir Pessoas</string>
-<string name="lista_de_pessoas">Lista de vaccines:</string>
-<string name="formato_data">dd/MM/yyyy</string>
+    <string name="formato_data">dd/MM/yyyy</string>
 <string name="aplicado_em">Aplicado em:</string>
 <string name="proxima_dose_em">Próxima dose em:</string>
 <string name="informe_o_nome_da_pessoa">Informe o name da person</string>
@@ -50,9 +36,7 @@
 <string name="data_de_nascimento">Data de dateOfBorn:</string>
 <string name="gender">Gênero:</string>
 <string name="parentesco2">Parentesco:</string>
-    <string name="cadastre_uma_nova_pessoa">Cadastre uma nova person:</string>
-<string name="cadastre_uma_nova_vacina">Cadastre uma nova vaccine:</string>
-<string name="sobre">Sobre</string>
+    <string name="sobre">Sobre</string>
 <string name="sobre_app">Vacineme é um aplicativo de gerenciamento de vaccines de um ambiente doméstico, desenvolvido para a máteria de Programação Móvel, ministrada pelo Profº Alexandre Feitoza na Universidade Tecnológica Federal do Paraná.</string>
 
 <string-array name="relationship">
@@ -78,8 +62,6 @@
     <item>@drawable/ic_avo_m</item>
     <item>@drawable/ic_pet</item>
 </string-array>
-    <string name="obrigado_sobre">Obrigado : )</string>
-    <string name="teste">teste</string>
     <string name="inserir_uma_nova_pessoa">Cadastrar nova person</string>
     <string name="vaccine_name">Nome da vacina</string>
 
