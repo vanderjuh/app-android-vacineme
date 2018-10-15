@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,14 +46,21 @@ public class AddNewRegisterActivity extends AppCompatActivity {
 
         people = findViewById(R.id.spinnerPeople);
         people.setAdapter(new PeopleSpinnerAdapter(this, MainActivity.getPeople()));
-
         vaccines = findViewById(R.id.spinnerVaccines);
         vaccines.setAdapter(new VaccinesSpinnerAdapter(this, MainActivity.getVaccines()));
-
         dateOfApplication = findViewById(R.id.editTextDateOfApplication);
         datePickerEvent(R.id.editTextDateOfApplication);
         dateOfNextApplication = findViewById(R.id.editTextDateOfNextApplication);
         datePickerEvent(R.id.editTextDateOfNextApplication);
+
+        getSeledtedPerson(getIntent());
+    }
+
+    private void getSeledtedPerson(Intent intent){
+        Bundle bundle = intent.getExtras();
+        if(bundle!=null){
+            people.setSelection(bundle.getInt(MainActivity.PERSON_POSITION));
+        }
     }
 
     private void datePickerEvent(int id) {

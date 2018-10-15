@@ -33,13 +33,38 @@ public class MainActivity extends AppCompatActivity {
     private static PeopleSpinnerAdapter spinnerAdapterPeople;
     private RegisterAdapter registerAdapter;
     private final String SELECTED_PERSON = "SELECTED_PERSON";
-    private final String PERSON_POSITION = "PERSON_POSITION";
+    public static final String PERSON_POSITION = "PERSON_POSITION";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(getString(R.string.welcome_to_vacineme));
+        listViewRegisters = findViewById(R.id.listViewRegisters);
+        people = new ArrayList<>();
+        vaccines = new ArrayList<>();
+        registers = new ArrayList<>();
+        setSpinnerPeople();
+        testRegisters();
+        insertDataSpinnerPeople();
+        insertDataListViewRegisters();
+        readPreferences();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDataComponents();
+    }
+
+    private void updateDataComponents(){
+        Person p = (Person) spinnerPeople.getSelectedItem();
+        if(p!=null){
+            registersFilter(p);
+        }
+    }
+
+    private void setSpinnerPeople(){
         spinnerPeople = findViewById(R.id.spinnerPeople);
         spinnerPeople.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -56,17 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
-        listViewRegisters = findViewById(R.id.listViewRegisters);
-
-        people = new ArrayList<>();
-        vaccines = new ArrayList<>();
-        registers = new ArrayList<>();
-
-        testRegisters();
-        insertDataSpinnerPeople();
-        insertDataListViewRegisters();
-        readPreferences();
     }
 
     private void testRegisters(){
@@ -118,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     private void readPreferences(){
         SharedPreferences preferences = getSharedPreferences(SELECTED_PERSON, Context.MODE_PRIVATE);
         int spinnerPeoplePosition = preferences.getInt(PERSON_POSITION, 0);
+        spinnerPeople.setSelection(spinnerPeoplePosition);
     }
 
     private void insertDataSpinnerPeople(){
@@ -154,7 +169,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.addNewRegister:
                 intentMenu = new Intent(this, AddNewRegisterActivity.class);
-                if(verifyBeforeAddNewRegister()) startActivity(intentMenu);
+                if(verifyBeforeAddNewRegister()){
+                    if(spinnerPeople.getSelectedItem()!=null){
+                        intentMenu.putExtra(PERSON_POSITION, spinnerPeople.getSelectedItemPosition());
+                    }
+                    startActivity(intentMenu);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
