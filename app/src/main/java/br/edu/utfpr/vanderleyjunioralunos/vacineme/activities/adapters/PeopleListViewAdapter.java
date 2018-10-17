@@ -62,8 +62,8 @@ public class PeopleListViewAdapter extends BaseAdapter {
 
             holder.imageView = view.findViewById(R.id.imageViewIconRelationship);
             holder.textViewName = view.findViewById(R.id.textViewPersonName);
-            holder.textViewDateOfBorn = view.findViewById(R.id.textViewPersonDateOfBorn);
-            holder.textViewGender = view.findViewById(R.id.textViewGender);
+            //holder.textViewDateOfBorn = view.findViewById(R.id.textViewPersonDateOfBorn);
+            //holder.textViewGender = view.findViewById(R.id.textViewGender);
             holder.textViewRelationship = view.findViewById(R.id.textViewRelationship);
 
             view.setTag(holder);
@@ -75,8 +75,8 @@ public class PeopleListViewAdapter extends BaseAdapter {
 
         holder.imageView.setImageDrawable(people.get(i).getRelationship().getIcon());
         holder.textViewName.setText(people.get(i).toString());
-        holder.textViewDateOfBorn.setText(context.getResources().getText(R.string.data_de_nascimento)+" "+new SimpleDateFormat(context.getString(R.string.formato_data)).format(people.get(i).getDateOfBorn()).toString());
-        holder.textViewGender.setText(context.getResources().getText(R.string.gender)+" "+ people.get(i).getGender().toString());
+        //holder.textViewDateOfBorn.setText(context.getResources().getText(R.string.data_de_nascimento)+" "+new SimpleDateFormat(context.getString(R.string.formato_data)).format(people.get(i).getDateOfBorn()).toString());
+        //holder.textViewGender.setText(context.getResources().getText(R.string.gender)+" "+ people.get(i).getGender().toString());
         holder.textViewRelationship.setText(context.getResources().getText(R.string.parentesco2)+" "+ people.get(i).getRelationship().getDescription().toString());
 
         return view;

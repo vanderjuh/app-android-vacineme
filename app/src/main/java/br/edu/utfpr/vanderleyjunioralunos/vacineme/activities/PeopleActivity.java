@@ -25,6 +25,7 @@ public class PeopleActivity extends AppCompatActivity {
     private View selectedView;
     private int selectedPosition = -1;
     private int EDITOR_MODE = 1;
+    private String ITEM_POSITION = "ITEM_POSITION";
 
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
         @Override
@@ -50,7 +51,7 @@ public class PeopleActivity extends AppCompatActivity {
                     return true;
                 case R.id.menuItemChange:
                     intentMenu = new Intent(PeopleActivity.this, AddNewPersonActivity.class);
-                    intentMenu.putExtra("ITEM_POSITION", selectedPosition);
+                    intentMenu.putExtra(ITEM_POSITION, selectedPosition);
                     startActivityForResult(intentMenu, EDITOR_MODE);
                     mode.finish();
                     return true;
@@ -99,6 +100,18 @@ public class PeopleActivity extends AppCompatActivity {
                 view.setSelected(true);
                 actionMode = startActionMode(actionModeCallback);
                 return true;
+            }
+        });
+        listViewPeople.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentMenu;
+                intentMenu = new Intent(PeopleActivity.this, AddNewPersonActivity.class);
+                intentMenu.putExtra(ITEM_POSITION, position);
+                if(actionMode!=null){
+                    actionMode.finish();
+                }
+                startActivityForResult(intentMenu, EDITOR_MODE);
             }
         });
     }

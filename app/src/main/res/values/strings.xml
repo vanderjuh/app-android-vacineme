@@ -93,5 +93,7 @@
     <string name="edit_person">Edit person</string>
     <string name="no_people_found">No people found</string>
     <string name="save_changes">Save changes</string>
+    <string name="no_vaccines_found">No vaccines found</string>
+    <string name="edit_vaccine">Edit vaccine</string>
 
 </resources>

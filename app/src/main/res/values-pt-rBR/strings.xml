@@ -1,7 +1,7 @@
 <resources>
     <string name="welcome_to_vacineme">Bem-vindo ao Vacineme</string>
     <string name="select_a_person">Selecione uma pessoa:</string>
-<string name="add_a_new_vaccine">Adicionar nova vaccine</string>
+<string name="add_a_new_vaccine">Adicionar nova vacina</string>
 <string name="made_by_vanderley">Criado por: Vanderley :)</string>
     <string name="genero_feminino">Feminino</string>
 <string name="genero_masculino">Masculino</string>
@@ -22,7 +22,7 @@
     <string name="adicionar_novo_registro">Adicionar novo registro</string>
 <string name="vaccines">Vacinas</string>
     <string name="lotNumber">Lote:</string>
-<string name="salvar_nova_vacina">Salvar nova vaccine</string>
+<string name="salvar_nova_vacina">Salvar nova vacina</string>
 <string name="laboratorio">Laboratório:</string>
     <string name="formato_data">dd/MM/yyyy</string>
 <string name="aplicado_em">Aplicado em:</string>
@@ -31,38 +31,65 @@
 <string name="informe_a_data_de_nascimento">Informe a data de dateOfBorn</string>
 <string name="informe_o_genero_da_pessoa">Informe o gênero da person</string>
 <string name="informe_o_parentesco">Informe o relationship</string>
-<string name="verifique_a_data_de_nascimento">Verifique a data de dateOfBorn</string>
+<string name="verifique_a_data_de_nascimento">Verifique a data de nascimento</string>
 <string name="nome_da_pessoa">Nome da person:</string>
-<string name="data_de_nascimento">Data de dateOfBorn:</string>
+<string name="data_de_nascimento">Data de nascimento:</string>
 <string name="gender">Gênero:</string>
 <string name="parentesco2">Parentesco:</string>
     <string name="sobre">Sobre</string>
-<string name="sobre_app">Vacineme é um aplicativo de gerenciamento de vaccines de um ambiente doméstico, desenvolvido para a máteria de Programação Móvel, ministrada pelo Profº Alexandre Feitoza na Universidade Tecnológica Federal do Paraná.</string>
-
-<string-array name="relationship">
-    <item>@string/esposo</item>
-    <item>@string/esposa</item>
-    <item>@string/filho</item>
-    <item>@string/filha</item>
-    <item>@string/pai</item>
-    <item>@string/mae</item>
-    <item>@string/avo</item>
-    <item>@string/avo_m</item>
-    <item>@string/pet</item>
-</string-array>
-
-<string-array name="icones_parentesco">
-    <item>@drawable/ic_homem</item>
-    <item>@drawable/ic_mulher</item>
-    <item>@drawable/ic_menino</item>
-    <item>@drawable/ic_menina</item>
-    <item>@drawable/ic_homem</item>
-    <item>@drawable/ic_mulher</item>
-    <item>@drawable/ic_avo</item>
-    <item>@drawable/ic_avo_m</item>
-    <item>@drawable/ic_pet</item>
-</string-array>
+<string name="sobre_app">Vacineme é um aplicativo de gerenciamento de vacinas de um ambiente doméstico, desenvolvido para a máteria de Programação Móvel, ministrada pelo Profº Alexandre Feitoza na Universidade Tecnológica Federal do Paraná.</string>
     <string name="inserir_uma_nova_pessoa">Cadastrar nova person</string>
     <string name="vaccine_name">Nome da vacina</string>
+    <string name="save_changes">Salvar mudanças</string>
+    <string name="no_people_found">Ninguem foi encontrado</string>
+    <string name="edit_person">Editar pessoa</string>
+    <string name="successfully_deleted">Deletado com sucesso</string>
+    <string name="change">Mudar</string>
+    <string name="choose_an_option">Escolha uma opçao:</string>
+    <string name="inform_the_date_of_next_application">Informe a data da próxima aplicação</string>
+    <string name="delete">Deletar</string>
+    <string name="delete_item">Deletar item</string>
+    <string name="nothing_selected">Nada foi selecionado</string>
+    <string name="register_successfully_registered">Registrado com sucesso</string>
+    <string name="inform_the_date_of_application">Informe a data da aplicação</string>
+    <string name="you_need_to_select_a_vaccine">Você precisa selecionar uma vacina</string>
+    <string name="you_need_to_select_a_person">Você precisa selecionar uma pessoa</string>
+    <string name="you_need_to_add_a_person_and_a_vaccine_before">Você precisa adicionar uma pessoa e uma vacina antes</string>
+    <string name="people">Pessoas</string>
+    <string name="date_next_application_form">Data da proxima aplicação:</string>
+    <string name="date_of_application_form">Data da aplicação:</string>
+    <string name="select_a_vaccine_form">Selecione uma vacina:</string>
+    <string name="select_a_person_form">Selecione uma pessoa:</string>
+    <string name="save_new_register">Salvar novo registro</string>
+    <string name="add_new_register">Adicionar novo registro</string>
+    <string name="insert_the_vaccine_description">Insira a descrição da vacina</string>
+    <string name="vaccine_successfully_registered">Vacina registrada com sucesso</string>
+    <string name="vaccine_description_form">Descrição da vacina:</string>
+    <string name="lot_number_form">Número do lote:</string>
+    <string name="laboratory_name_form">Nome do laboratório:</string>
+    <string name="about_vacineme">Sobre Vacineme</string>
 
+    <string-array name="relationship">
+        <item>@string/esposo</item>
+        <item>@string/esposa</item>
+        <item>@string/filho</item>
+        <item>@string/filha</item>
+        <item>@string/pai</item>
+        <item>@string/mae</item>
+        <item>@string/avo</item>
+        <item>@string/avo_m</item>
+        <item>@string/pet</item>
+    </string-array>
+
+    <string-array name="icones_parentesco">
+        <item>@drawable/ic_homem</item>
+        <item>@drawable/ic_mulher</item>
+        <item>@drawable/ic_menino</item>
+        <item>@drawable/ic_menina</item>
+        <item>@drawable/ic_homem</item>
+        <item>@drawable/ic_mulher</item>
+        <item>@drawable/ic_avo</item>
+        <item>@drawable/ic_avo_m</item>
+        <item>@drawable/ic_pet</item>
+    </string-array>
 </resources>

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         new Date(),
                         "Male",
                         new Relationship(
-                                "Father",
+                                getString(R.string.pai),
                                 getResources().getDrawable(R.drawable.ic_homem)
                         )
                 )
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         new Date(),
                         "Male",
                         new Relationship(
-                                "Son",
+                                getString(R.string.filho),
                                 getResources().getDrawable(R.drawable.ic_menino)
                         )
                 )

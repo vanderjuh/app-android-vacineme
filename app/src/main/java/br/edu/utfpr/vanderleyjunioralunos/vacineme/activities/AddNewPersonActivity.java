@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +61,21 @@ public class AddNewPersonActivity extends AppCompatActivity {
         if(!verifyIntentMode(getIntent())){
             setTitle(getString(R.string.inserir_uma_nova_pessoa));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.item_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(!verifyIntentMode(getIntent())){
+            menu.getItem(0).setVisible(false);
+            menu.getItem(0).setEnabled(false);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private boolean verifyIntentMode(Intent intent){
@@ -198,6 +214,10 @@ public class AddNewPersonActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.menuItemDelete:
+                MainActivity.getPeople().remove(ITEM_POSITION);
+                PeopleActivity.updateListView();
+                this.finish();
         }
         return true;
     }
