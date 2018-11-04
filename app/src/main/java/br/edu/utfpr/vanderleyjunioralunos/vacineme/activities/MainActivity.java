@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         vaccines = new ArrayList<>();
         registers = new ArrayList<>();
         setSpinnerPeople();
-        testRegisters();
         insertDataSpinnerPeople();
         insertDataListViewRegisters();
         readPreferences();
@@ -80,45 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-        );
-    }
-
-    private void testRegisters(){
-        people.add(
-                new Person(
-                        "Vanderley",
-                        new Date(),
-                        "Male",
-                        new Relationship(
-                                getString(R.string.pai),
-                                getResources().getDrawable(R.drawable.ic_homem)
-                        )
-                )
-        );
-        people.add(
-                new Person(
-                        "Renan",
-                        new Date(),
-                        "Male",
-                        new Relationship(
-                                getString(R.string.filho),
-                                getResources().getDrawable(R.drawable.ic_menino)
-                        )
-                )
-        );
-        vaccines.add(
-                new Vaccine(
-                        "Flu",
-                        "Teste",
-                        "FD64d"
-                )
-        );
-        vaccines.add(
-                new Vaccine(
-                        "Tetano",
-                        "Teste",
-                        "SDD3A"
-                )
         );
     }
 

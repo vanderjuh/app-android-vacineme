@@ -2,6 +2,7 @@ package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,22 +15,25 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.VaccinesListViewAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 
 public class VaccinesActivity extends AppCompatActivity {
 
     private static VaccinesListViewAdapter vaccinesListViewAdapter;
     private ListView listViewVaccines;
     private int selectedPosition = -1;
-    private String ITEM_POSITION = "ITEM_POSITION";
+    private String VACCINE_ID = "VACCINE_ID";
     private int EDITOR_MODE = 1;
+    private int NOVO_MODE = 2;
     private View selectedView;
     ActionMode actionMode;
+
+    private static List<Vaccine> vaccinesRoom;
 
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
         @Override
@@ -46,16 +50,16 @@ public class VaccinesActivity extends AppCompatActivity {
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             Intent intentMenu;
+            Vaccine v = vaccinesRoom.get(selectedPosition);
             switch (item.getItemId()) {
                 case R.id.menuItemDelete:
-                    MainActivity.getVaccines().remove(selectedPosition);
-                    vaccinesListViewAdapter.notifyDataSetChanged();
+                    deleteVaccineAndReloadData(v);
                     Toast.makeText(VaccinesActivity.this, R.string.successfully_deleted, Toast.LENGTH_SHORT).show();
                     mode.finish();
                     return true;
                 case R.id.menuItemChange:
                     intentMenu = new Intent(VaccinesActivity.this, AddNewVaccineActivity.class);
-                    intentMenu.putExtra(ITEM_POSITION, selectedPosition);
+                    intentMenu.putExtra(VACCINE_ID, v.getId());
                     startActivityForResult(intentMenu, EDITOR_MODE);
                     mode.finish();
                     return true;
@@ -89,12 +93,39 @@ public class VaccinesActivity extends AppCompatActivity {
         setListViewPeople();
     }
 
+    private void deleteVaccineAndReloadData(final Vaccine v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                VacinemeDatabase.getDatabase(VaccinesActivity.this).vaccineDAO().delete(v);
+                vaccinesRoom.remove(selectedPosition);
+                loadDataFromVaccines();
+            }
+        });
+    }
+
+    private void loadDataFromVaccines(){
+        VaccinesActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //vaccinesListViewAdapter.notifyDataSetChanged();
+                vaccinesListViewAdapter = new VaccinesListViewAdapter(VaccinesActivity.this, vaccinesRoom);
+                listViewVaccines.setAdapter(vaccinesListViewAdapter);
+            }
+        });
+    }
+
     private void setListViewPeople(){
         listViewVaccines = findViewById(R.id.listViewVaccines);
-        vaccinesListViewAdapter = new VaccinesListViewAdapter(this, MainActivity.getVaccines());
-        listViewVaccines.setAdapter(vaccinesListViewAdapter);
-
         listViewVaccines.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                VacinemeDatabase database = VacinemeDatabase.getDatabase(VaccinesActivity.this);
+                vaccinesRoom = database.vaccineDAO().queryAll();
+                loadDataFromVaccines();
+            }
+        });
         listViewVaccines.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,7 +145,8 @@ public class VaccinesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intentMenu;
                 intentMenu = new Intent(VaccinesActivity.this, AddNewVaccineActivity.class);
-                intentMenu.putExtra(ITEM_POSITION, position);
+                Vaccine v = vaccinesRoom.get(position);
+                intentMenu.putExtra(VACCINE_ID, v.getId());
                 if(actionMode!=null){
                     actionMode.finish();
                 }
@@ -133,7 +165,7 @@ public class VaccinesActivity extends AppCompatActivity {
                 break;
             case R.id.menuItemAddNewVaccine:
                 intentMenu = new Intent(this, AddNewVaccineActivity.class);
-                startActivity(intentMenu);
+                startActivityForResult(intentMenu, NOVO_MODE);
         }
         return true;
     }
@@ -144,7 +176,16 @@ public class VaccinesActivity extends AppCompatActivity {
         return true;
     }
 
-    public static void updateListView() {
-        vaccinesListViewAdapter.notifyDataSetChanged();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK && (requestCode == NOVO_MODE || requestCode == EDITOR_MODE)){
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    vaccinesRoom = VacinemeDatabase.getDatabase(VaccinesActivity.this).vaccineDAO().queryAll();
+                    loadDataFromVaccines();
+                }
+            });
+        }
     }
 }

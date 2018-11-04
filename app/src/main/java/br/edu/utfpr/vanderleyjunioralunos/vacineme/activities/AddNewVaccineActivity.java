@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 
 public class AddNewVaccineActivity extends AppCompatActivity {
 
@@ -21,7 +22,8 @@ public class AddNewVaccineActivity extends AppCompatActivity {
     private TextView vaccineLaboratory;
     private TextView vaccineLotNumber;
     private Button button;
-    private int ITEM_POSITION = -1;
+    private int VACCINE_ID = -1;
+    private Vaccine vaccine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +66,31 @@ public class AddNewVaccineActivity extends AppCompatActivity {
         if(bundle!=null){
             setTitle(getString(R.string.edit_vaccine));
             button.setText(R.string.save_changes);
-            ITEM_POSITION = bundle.getInt("ITEM_POSITION");
-            setValuesForm(MainActivity.getVaccines().get(ITEM_POSITION));
+            VACCINE_ID = bundle.getInt("VACCINE_ID");
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    vaccine = VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().queryForId(VACCINE_ID);
+                    AddNewVaccineActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setValuesForm(vaccine);
+                        }
+                    });
+                }
+            });
             return true;
         }
         return false;
+    }
+
+    private void deleteVaccine(final Vaccine v){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().delete(v);
+            }
+        });
     }
 
     private void setValuesForm(Vaccine v){
@@ -83,19 +105,28 @@ public class AddNewVaccineActivity extends AppCompatActivity {
 
     public void saveNewVaccine(View view) {
         if (verifyForm()) {
-            Vaccine v = new Vaccine(
+            final Vaccine v = new Vaccine(
                     vaccineDescription.getText().toString(),
                     vaccineLaboratory.getText().toString(),
                     vaccineLotNumber.getText().toString()
             );
             if(!button.getText().toString().equalsIgnoreCase(getString(R.string.save_changes))){
-                MainActivity.addNewVaccine(v);
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().insert(v);
+                    }
+                });
             } else {
-                MainActivity.getVaccines().get(ITEM_POSITION).setDescription(vaccineDescription.getText().toString());
-                MainActivity.getVaccines().get(ITEM_POSITION).setLotNumber(vaccineLotNumber.getText().toString());
-                MainActivity.getVaccines().get(ITEM_POSITION).setLaboratorio(vaccineLaboratory.getText().toString());
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        v.setId(vaccine.getId());
+                        VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().update(v);
+                    }
+                });
             }
-            VaccinesActivity.updateListView();
+            setResult(RESULT_OK);
             this.finish();
         }
     }
@@ -116,8 +147,8 @@ public class AddNewVaccineActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.menuItemDelete:
-                MainActivity.getVaccines().remove(ITEM_POSITION);
-                VaccinesActivity.updateListView();
+                deleteVaccine(vaccine);
+                setResult(RESULT_OK);
                 this.finish();
         }
         return true;
