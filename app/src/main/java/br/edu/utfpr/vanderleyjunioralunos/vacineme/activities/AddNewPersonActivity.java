@@ -2,7 +2,6 @@ package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.RelationshitSpinnerAdapter;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.RelationshipSpinnerAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
@@ -101,20 +100,10 @@ public class AddNewPersonActivity extends AppCompatActivity {
             } else {
                 m.setChecked(true);
             }
-            spinnerRelationship.setSelection(findRelationshipPosition(p.getRelationship()));
+            spinnerRelationship.setSelection(Relationship.findRelationshipPosition(p.getRelationship(), this));
         } else {
             Toast.makeText(this, R.string.no_people_found, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private int findRelationshipPosition(Relationship r){
-        String[] rs = getResources().getStringArray(R.array.relationship);
-        for(int i=0;i<rs.length;i++){
-            if(rs[i].equalsIgnoreCase(r.getDescription())){
-                return i;
-            }
-        }
-        return -1;
     }
 
     private void datePickerEvent() {
@@ -146,9 +135,9 @@ public class AddNewPersonActivity extends AppCompatActivity {
             relationships.add(new Relationship(descs[cont], icons.getDrawable(cont)));
         }
 
-        RelationshitSpinnerAdapter paisAdapter = new RelationshitSpinnerAdapter(this, relationships);
+        RelationshipSpinnerAdapter relationshipSpinnerAdapter = new RelationshipSpinnerAdapter(this, relationships);
 
-        spinnerRelationship.setAdapter(paisAdapter);
+        spinnerRelationship.setAdapter(relationshipSpinnerAdapter);
     }
 
     private String getSelectedGender(int id) {
@@ -168,7 +157,7 @@ public class AddNewPersonActivity extends AppCompatActivity {
                         name.getText().toString(),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()),
                         getSelectedGender(genrer.getCheckedRadioButtonId()),
-                        (Relationship) spinnerRelationship.getSelectedItem()
+                        ((Relationship) spinnerRelationship.getSelectedItem()).getDescription()
                 );
                 if(!button.getText().toString().equalsIgnoreCase(getString(R.string.save_changes))){
                     MainActivity.addNewPerson(p);
@@ -176,7 +165,7 @@ public class AddNewPersonActivity extends AppCompatActivity {
                     MainActivity.getPeople().get(ITEM_POSITION).setName(name.getText().toString());
                     MainActivity.getPeople().get(ITEM_POSITION).setDateOfBorn(new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()));
                     MainActivity.getPeople().get(ITEM_POSITION).setGender(getSelectedGender(genrer.getCheckedRadioButtonId()));
-                    MainActivity.getPeople().get(ITEM_POSITION).setRelationship((Relationship) spinnerRelationship.getSelectedItem());
+                    MainActivity.getPeople().get(ITEM_POSITION).setRelationship(((Relationship) spinnerRelationship.getSelectedItem()).getDescription());
                     MainActivity.updateSpinnerPeople();
                 }
                 PeopleActivity.updateListView();

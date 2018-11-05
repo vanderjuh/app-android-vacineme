@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
 
 public class PeopleSpinnerAdapter extends BaseAdapter {
 
@@ -66,9 +68,10 @@ public class PeopleSpinnerAdapter extends BaseAdapter {
             holder = (PersonHolder) view.getTag();
         }
 
-        holder.imageView.setImageDrawable(people.get(i).getRelationship().getIcon());
+        holder.imageView.setImageDrawable(Relationship.findIcon(people.get(i).getRelationship(), context));
         holder.textViewName.setText(people.get(i).toString());
 
         return view;
     }
+
 }

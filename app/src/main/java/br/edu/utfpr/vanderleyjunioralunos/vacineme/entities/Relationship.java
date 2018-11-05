@@ -1,12 +1,16 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Relationship implements Parcelable {
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
+
+public class Relationship{
 
     private String description;
     private Drawable icon;
@@ -20,23 +24,21 @@ public class Relationship implements Parcelable {
         this.icon = icon;
     }
 
-    public Relationship(Parcel in){
-        this.description = in.readString();
-        Bitmap bitmap = (Bitmap)in.readParcelable(getClass().getClassLoader());
-        this.icon = new BitmapDrawable(bitmap);
+    public static int findRelationshipPosition(String description, Context context){
+        String[] rs = context.getResources().getStringArray(R.array.relationship);
+        for(int i=0;i<rs.length;i++){
+            if(rs[i].equalsIgnoreCase(description)){
+                return i;
+            }
+        }
+        return -1;
     }
 
-    public static final Creator<Relationship> CREATOR = new Creator<Relationship>() {
-        @Override
-        public Relationship createFromParcel(Parcel in) {
-            return new Relationship(in);
-        }
-
-        @Override
-        public Relationship[] newArray(int size) {
-            return new Relationship[size];
-        }
-    };
+    public static Drawable findIcon(String relationship, Context context) {
+        TypedArray icons = context.getResources().obtainTypedArray(R.array.icones_parentesco);
+        int position = findRelationshipPosition(relationship, context);
+        return icons.getDrawable(position);
+    }
 
     public String getDescription() {
         return description;
@@ -52,18 +54,6 @@ public class Relationship implements Parcelable {
 
     public void setIcon(Drawable icon) {
         this.icon = icon;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.description);
-        Bitmap bitmap = (Bitmap)((BitmapDrawable) this.icon).getBitmap();
-        dest.writeParcelable(bitmap, flags);
     }
 
 }

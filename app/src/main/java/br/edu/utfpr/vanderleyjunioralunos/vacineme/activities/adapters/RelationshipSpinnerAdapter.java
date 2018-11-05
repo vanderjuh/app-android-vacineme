@@ -13,17 +13,17 @@ import java.util.List;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
 
-public class RelationshitSpinnerAdapter extends BaseAdapter {
+public class RelationshipSpinnerAdapter extends BaseAdapter {
 
     Context context;
     List<Relationship> relationships;
 
     private static class RelationshipHolder {
-        public ImageView imageViewBandeira;
+        public ImageView imageViewRelationship;
         public TextView textViewName;
     }
 
-    public RelationshitSpinnerAdapter(Context context, List<Relationship> relationships) {
+    public RelationshipSpinnerAdapter(Context context, List<Relationship> relationships) {
 
         this.context = context;
         this.relationships = relationships;
@@ -56,7 +56,7 @@ public class RelationshitSpinnerAdapter extends BaseAdapter {
 
             holder = new RelationshipHolder();
 
-            holder.imageViewBandeira = view.findViewById(R.id.imageViewRelationship);
+            holder.imageViewRelationship = view.findViewById(R.id.imageViewRelationship);
             holder.textViewName = view.findViewById(R.id.textViewName);
 
             view.setTag(holder);
@@ -66,7 +66,7 @@ public class RelationshitSpinnerAdapter extends BaseAdapter {
             holder = (RelationshipHolder) view.getTag();
         }
 
-        holder.imageViewBandeira.setImageDrawable(relationships.get(i).getIcon());
+        holder.imageViewRelationship.setImageDrawable(relationships.get(i).getIcon());
         holder.textViewName.setText(relationships.get(i).getDescription());
 
         return view;
