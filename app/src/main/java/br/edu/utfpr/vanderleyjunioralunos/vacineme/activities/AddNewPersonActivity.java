@@ -3,6 +3,7 @@ package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.Relations
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.DateUtil;
 
 public class AddNewPersonActivity extends AppCompatActivity {
@@ -37,7 +39,9 @@ public class AddNewPersonActivity extends AppCompatActivity {
     private TextView dateOfBorn;
     private Button button;
     private Calendar calendar;
-    private int ITEM_POSITION;
+    private int PERSON_ID = -1;
+    private Person person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +86,19 @@ public class AddNewPersonActivity extends AppCompatActivity {
         if(bundle!=null){
             setTitle(getString(R.string.edit_person));
             button.setText(R.string.save_changes);
-            ITEM_POSITION = bundle.getInt("ITEM_POSITION");
-            setValuesForm(MainActivity.getPeople().get(ITEM_POSITION));
+            PERSON_ID = bundle.getInt("PERSON_ID");
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    person = VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().queryForId(PERSON_ID);
+                    AddNewPersonActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setValuesForm(person);
+                        }
+                    });
+                }
+            });
             return true;
         }
         return false;
@@ -103,6 +118,7 @@ public class AddNewPersonActivity extends AppCompatActivity {
             spinnerRelationship.setSelection(Relationship.findRelationshipPosition(p.getRelationship(), this));
         } else {
             Toast.makeText(this, R.string.no_people_found, Toast.LENGTH_SHORT).show();
+            this.finish();
         }
     }
 
@@ -150,26 +166,46 @@ public class AddNewPersonActivity extends AppCompatActivity {
         return "";
     }
 
+    private void deletePerson(final Person p){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().delete(p);
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+    }
+
     public void saveNewPerson(View view) {
         if (verifyForm()) {
             try {
-                Person p = new Person(
+                final Person p = new Person(
                         name.getText().toString(),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()),
                         getSelectedGender(genrer.getCheckedRadioButtonId()),
                         ((Relationship) spinnerRelationship.getSelectedItem()).getDescription()
                 );
                 if(!button.getText().toString().equalsIgnoreCase(getString(R.string.save_changes))){
-                    MainActivity.addNewPerson(p);
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().insert(p);
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    });
                 } else {
-                    MainActivity.getPeople().get(ITEM_POSITION).setName(name.getText().toString());
-                    MainActivity.getPeople().get(ITEM_POSITION).setDateOfBorn(new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()));
-                    MainActivity.getPeople().get(ITEM_POSITION).setGender(getSelectedGender(genrer.getCheckedRadioButtonId()));
-                    MainActivity.getPeople().get(ITEM_POSITION).setRelationship(((Relationship) spinnerRelationship.getSelectedItem()).getDescription());
-                    MainActivity.updateSpinnerPeople();
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            p.setId(person.getId());
+                            VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().update(p);
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    });
                 }
-                PeopleActivity.updateListView();
-                this.finish();
             } catch (ParseException e) {
                 Toast.makeText(this, R.string.verifique_a_data_de_nascimento, Toast.LENGTH_SHORT).show();
             }
@@ -201,12 +237,10 @@ public class AddNewPersonActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                this.finish();
                 break;
             case R.id.menuItemDelete:
-                MainActivity.getPeople().remove(ITEM_POSITION);
-                PeopleActivity.updateListView();
-                this.finish();
+                deletePerson(person);
         }
         return true;
     }

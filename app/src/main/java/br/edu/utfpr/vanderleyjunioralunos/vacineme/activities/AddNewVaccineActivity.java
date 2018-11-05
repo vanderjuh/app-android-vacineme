@@ -89,6 +89,8 @@ public class AddNewVaccineActivity extends AppCompatActivity {
             @Override
             public void run() {
                 VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().delete(v);
+                setResult(RESULT_OK);
+                finish();
             }
         });
     }
@@ -100,6 +102,7 @@ public class AddNewVaccineActivity extends AppCompatActivity {
             vaccineLaboratory.setText(v.getLaboratorio());
         } else {
             Toast.makeText(this, R.string.no_vaccines_found, Toast.LENGTH_SHORT).show();
+            this.finish();
         }
     }
 
@@ -115,6 +118,8 @@ public class AddNewVaccineActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().insert(v);
+                        setResult(RESULT_OK);
+                        finish();
                     }
                 });
             } else {
@@ -123,11 +128,11 @@ public class AddNewVaccineActivity extends AppCompatActivity {
                     public void run() {
                         v.setId(vaccine.getId());
                         VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().update(v);
+                        setResult(RESULT_OK);
+                        finish();
                     }
                 });
             }
-            setResult(RESULT_OK);
-            this.finish();
         }
     }
 
@@ -148,8 +153,6 @@ public class AddNewVaccineActivity extends AppCompatActivity {
                 break;
             case R.id.menuItemDelete:
                 deleteVaccine(vaccine);
-                setResult(RESULT_OK);
-                this.finish();
         }
         return true;
     }

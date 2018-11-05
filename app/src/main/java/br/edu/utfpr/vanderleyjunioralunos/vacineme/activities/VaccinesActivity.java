@@ -29,11 +29,11 @@ public class VaccinesActivity extends AppCompatActivity {
     private int selectedPosition = -1;
     private String VACCINE_ID = "VACCINE_ID";
     private int EDITOR_MODE = 1;
-    private int NOVO_MODE = 2;
+    private int INSERT_MODE = 2;
     private View selectedView;
     ActionMode actionMode;
 
-    private static List<Vaccine> vaccinesRoom;
+    private List<Vaccine> vaccinesRoom;
 
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
         @Override
@@ -98,10 +98,10 @@ public class VaccinesActivity extends AppCompatActivity {
             @Override
             public void run() {
                 VacinemeDatabase.getDatabase(VaccinesActivity.this).vaccineDAO().delete(v);
-                vaccinesRoom.remove(selectedPosition);
-                loadDataFromVaccines();
             }
         });
+        vaccinesRoom.remove(selectedPosition);
+        loadDataFromVaccines();
     }
 
     private void loadDataFromVaccines(){
@@ -165,7 +165,7 @@ public class VaccinesActivity extends AppCompatActivity {
                 break;
             case R.id.menuItemAddNewVaccine:
                 intentMenu = new Intent(this, AddNewVaccineActivity.class);
-                startActivityForResult(intentMenu, NOVO_MODE);
+                startActivityForResult(intentMenu, INSERT_MODE);
         }
         return true;
     }
@@ -178,7 +178,7 @@ public class VaccinesActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK && (requestCode == NOVO_MODE || requestCode == EDITOR_MODE)){
+        if(resultCode == RESULT_OK && (requestCode == INSERT_MODE || requestCode == EDITOR_MODE)){
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {

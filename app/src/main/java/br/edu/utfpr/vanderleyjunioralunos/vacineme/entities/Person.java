@@ -27,6 +27,7 @@ public class Person {
 
     public Person() {}
 
+    @Ignore
     public Person(String name, Date dateOfBorn, String gender, String relationship) {
         this.name = name;
         this.dateOfBorn = dateOfBorn;
@@ -67,11 +68,12 @@ public class Person {
         this.gender = gender;
     }
 
+    @NonNull
     public String getRelationship() {
         return relationship;
     }
 
-    public void setRelationship(String relationship) {
+    public void setRelationship(@NonNull String relationship) {
         this.relationship = relationship;
     }
 

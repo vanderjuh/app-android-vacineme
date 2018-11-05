@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -21,6 +22,7 @@ public class Vaccine {
 
     public Vaccine() {}
 
+    @Ignore
     public Vaccine(String description, String laboratorio, String lotNumber) {
         this.description = description;
         this.lotNumber = lotNumber;
