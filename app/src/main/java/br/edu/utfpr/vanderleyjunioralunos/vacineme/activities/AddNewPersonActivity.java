@@ -25,8 +25,8 @@ import java.util.Calendar;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.RelationshipSpinnerAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.DateUtil;
 

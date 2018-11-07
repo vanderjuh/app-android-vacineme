@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Register;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Register;
 
 public class RegisterAdapter extends ArrayAdapter<Register> {
 
@@ -41,7 +41,7 @@ public class RegisterAdapter extends ArrayAdapter<Register> {
         TextView dateOfApplication = row.findViewById(R.id.textViewDateOfApplication);
         TextView dateNextVaccine = row.findViewById(R.id.textViewNextDateVaccine);
 
-        image.setImageResource(this.registers.get(position).getIconVaccine());
+        image.setImageResource(R.drawable.ic_vacina);
         title.setText(this.registers.get(position).getVaccine().getDescription().toUpperCase());
         dateOfApplication.setText(dateOfApplication.getText().toString()+" "+new SimpleDateFormat(context.getString(R.string.formato_data)).format(this.registers.get(position).getVaccineDate()).toString());
         dateNextVaccine.setText(dateNextVaccine.getText().toString()+" "+new SimpleDateFormat(context.getString(R.string.formato_data)).format(this.registers.get(position).getNextDateVaccine()).toString());

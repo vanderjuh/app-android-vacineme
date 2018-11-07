@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 
 public class AddNewVaccineActivity extends AppCompatActivity {

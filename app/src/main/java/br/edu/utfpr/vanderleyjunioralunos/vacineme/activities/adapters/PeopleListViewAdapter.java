@@ -1,8 +1,6 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Relationship;
 
 public class PeopleListViewAdapter extends BaseAdapter {
 

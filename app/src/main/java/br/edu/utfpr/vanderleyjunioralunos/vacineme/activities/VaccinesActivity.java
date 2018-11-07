@@ -19,7 +19,7 @@ import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.VaccinesListViewAdapter;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 
 public class VaccinesActivity extends AppCompatActivity {

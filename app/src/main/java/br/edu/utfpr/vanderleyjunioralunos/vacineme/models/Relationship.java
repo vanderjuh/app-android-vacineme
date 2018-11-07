@@ -1,12 +1,8 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.models;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 

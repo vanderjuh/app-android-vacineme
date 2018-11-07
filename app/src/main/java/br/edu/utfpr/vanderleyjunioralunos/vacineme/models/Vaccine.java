@@ -1,4 +1,4 @@
-package br.edu.utfpr.vanderleyjunioralunos.vacineme.entities;
+package br.edu.utfpr.vanderleyjunioralunos.vacineme.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import java.util.List;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 
 @Dao
 public interface PersonDAO {

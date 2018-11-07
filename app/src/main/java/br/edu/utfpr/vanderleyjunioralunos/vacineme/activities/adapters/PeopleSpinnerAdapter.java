@@ -1,7 +1,6 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Relationship;
 
 public class PeopleSpinnerAdapter extends BaseAdapter {
 

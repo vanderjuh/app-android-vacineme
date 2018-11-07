@@ -8,7 +8,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 
 @Dao
 public interface VaccineDAO {
@@ -27,5 +27,8 @@ public interface VaccineDAO {
 
     @Query("SELECT * FROM vaccines ORDER BY description ASC")
     List<Vaccine> queryAll();
+
+    @Query("SELECT COUNT(id) FROM vaccines")
+    int queryCount();
 
 }

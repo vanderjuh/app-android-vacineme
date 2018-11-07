@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 
 public class VaccinesSpinnerAdapter extends BaseAdapter {
 

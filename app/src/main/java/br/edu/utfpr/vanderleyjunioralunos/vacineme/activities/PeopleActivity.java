@@ -19,7 +19,7 @@ import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.PeopleListViewAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
 
 public class PeopleActivity extends AppCompatActivity {
@@ -184,8 +184,11 @@ public class PeopleActivity extends AppCompatActivity {
                 public void run() {
                     peopleRoom = VacinemeDatabase.getDatabase(PeopleActivity.this).personDAO().queryAll();
                     loadDataFromPeople();
+                    setResult(RESULT_OK);
                 }
             });
+        } else {
+            setResult(RESULT_CANCELED);
         }
     }
 }

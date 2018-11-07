@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Relationship;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Relationship;
 
 public class RelationshipSpinnerAdapter extends BaseAdapter {
 

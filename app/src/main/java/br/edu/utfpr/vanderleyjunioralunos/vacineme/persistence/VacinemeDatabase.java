@@ -8,20 +8,22 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
 import java.util.concurrent.Executors;
 
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Person;
-import br.edu.utfpr.vanderleyjunioralunos.vacineme.entities.Vaccine;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Register;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.DAO.PersonDAO;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.DAO.RegisterDAO;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.DAO.VaccineDAO;
 
-@Database(entities = {Vaccine.class, Person.class}, version = 1)
+@Database(entities = {Vaccine.class, Person.class, Register.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class VacinemeDatabase extends RoomDatabase {
 
     public abstract VaccineDAO vaccineDAO();
     public abstract PersonDAO personDAO();
+    public abstract RegisterDAO registerDAO();
 
     private static VacinemeDatabase instance;
 
@@ -29,7 +31,7 @@ public abstract class VacinemeDatabase extends RoomDatabase {
         if(instance == null){
             synchronized (VacinemeDatabase.class){
                 if(instance == null){
-                    Builder builder = Room.databaseBuilder(context, VacinemeDatabase.class, "vacineme.db");
+                    Builder builder = Room.databaseBuilder(context, VacinemeDatabase.class, "vacineme2.db");
                     builder.addCallback(new Callback() {
                         @Override
                         public void onCreate(@NonNull SupportSQLiteDatabase db) {
