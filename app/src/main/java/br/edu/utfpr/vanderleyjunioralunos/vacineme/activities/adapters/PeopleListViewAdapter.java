@@ -71,7 +71,7 @@ public class PeopleListViewAdapter extends BaseAdapter {
 
         holder.imageView.setImageDrawable(Relationship.findIcon(people.get(i).getRelationship(), context));
         holder.textViewName.setText(people.get(i).toString());
-        holder.textViewRelationship.setText(context.getResources().getText(R.string.parentesco2)+" "+ people.get(i).getRelationship());
+        holder.textViewRelationship.setText(context.getResources().getText(R.string.parentesco2)+" "+ context.getResources().getStringArray(R.array.relationship)[people.get(i).getRelationship()]);
 
         return view;
     }

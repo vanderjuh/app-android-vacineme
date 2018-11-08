@@ -1,5 +1,6 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.models;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
@@ -19,9 +20,11 @@ public class Register {
     private int id;
 
     @NonNull
+    @ColumnInfo(index = true)
     private int vaccineId;
 
     @NonNull
+    @ColumnInfo(index = true)
     private int personId;
 
     @Ignore
@@ -33,6 +36,7 @@ public class Register {
 
     public Register(){}
 
+    @Ignore
     public Register(int vaccineId, int personId,@NonNull Date vaccineDate, Date nextDateVaccine) {
         this.vaccineId = vaccineId;
         this.personId = personId;

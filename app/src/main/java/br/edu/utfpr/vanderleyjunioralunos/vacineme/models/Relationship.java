@@ -30,10 +30,9 @@ public class Relationship{
         return -1;
     }
 
-    public static Drawable findIcon(String relationship, Context context) {
+    public static Drawable findIcon(int relationship, Context context) {
         TypedArray icons = context.getResources().obtainTypedArray(R.array.icones_parentesco);
-        int position = findRelationshipPosition(relationship, context);
-        return icons.getDrawable(position);
+        return icons.getDrawable(relationship);
     }
 
     public String getDescription() {

@@ -116,7 +116,7 @@ public class AddNewPersonActivity extends AppCompatActivity {
             } else {
                 m.setChecked(true);
             }
-            spinnerRelationship.setSelection(Relationship.findRelationshipPosition(p.getRelationship(), this));
+            spinnerRelationship.setSelection(p.getRelationship());
         } else {
             Toast.makeText(this, R.string.no_people_found, Toast.LENGTH_SHORT).show();
             this.finish();
@@ -196,7 +196,7 @@ public class AddNewPersonActivity extends AppCompatActivity {
                         name.getText().toString(),
                         new SimpleDateFormat(getString(R.string.formato_data)).parse(dateOfBorn.getText().toString()),
                         getSelectedGender(genrer.getCheckedRadioButtonId()),
-                        ((Relationship) spinnerRelationship.getSelectedItem()).getDescription()
+                        Relationship.findRelationshipPosition(((Relationship) spinnerRelationship.getSelectedItem()).getDescription(), this)
                 );
                 if(!button.getText().toString().equalsIgnoreCase(getString(R.string.save_changes))){
                     AsyncTask.execute(new Runnable() {

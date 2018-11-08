@@ -19,12 +19,12 @@ public class Person {
     private String gender;
 
     @NonNull
-    private String relationship;
+    private int relationship;
 
     public Person() {}
 
     @Ignore
-    public Person(String name, Date dateOfBorn, String gender, String relationship) {
+    public Person(String name, Date dateOfBorn, String gender, int relationship) {
         this.name = name;
         this.dateOfBorn = dateOfBorn;
         this.gender = gender;
@@ -65,11 +65,11 @@ public class Person {
     }
 
     @NonNull
-    public String getRelationship() {
+    public int getRelationship() {
         return relationship;
     }
 
-    public void setRelationship(@NonNull String relationship) {
+    public void setRelationship(@NonNull int relationship) {
         this.relationship = relationship;
     }
 
