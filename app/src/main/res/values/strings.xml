@@ -97,5 +97,14 @@
     <string name="edit_vaccine">Edit vaccine</string>
     <string name="edit_register">Edit register</string>
     <string name="save">Save</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="do_you_really_want_to_delete_this_person">Do you really want to delete this person?</string>
+    <string name="do_you_really_want_to_delete_this_register">Do you really want to delete this register?</string>
+    <string name="do_you_really_want_to_delete_this_vaccine">Do you really want to delete this vaccine?</string>
+    <string name="alert">Alert</string>
+    <string name="ok">Ok</string>
+    <string name="this_vaccine_is_being_used">This vaccine is being used</string>
 
 </resources>

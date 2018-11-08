@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Relationship;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.AlertsUtil;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.DateUtil;
 
 public class AddNewPersonActivity extends AppCompatActivity {
@@ -166,14 +168,25 @@ public class AddNewPersonActivity extends AppCompatActivity {
     }
 
     private void deletePerson(final Person p){
-        AsyncTask.execute(new Runnable() {
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().delete(p);
-                setResult(RESULT_OK);
-                finish();
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                VacinemeDatabase.getDatabase(AddNewPersonActivity.this).personDAO().delete(p);
+                                setResult(RESULT_OK);
+                                finish();
+                            }
+                        });
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                }
             }
-        });
+        };
+        AlertsUtil.confirmation(this, getString(R.string.do_you_really_want_to_delete_this_person), listener);
     }
 
     public void saveNewPerson(View view) {

@@ -1,5 +1,6 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.PeopleLis
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.AlertsUtil;
 
 public class PeopleActivity extends AppCompatActivity {
 
@@ -53,8 +55,7 @@ public class PeopleActivity extends AppCompatActivity {
             Person p = peopleRoom.get(selectedPosition);
             switch (item.getItemId()) {
                 case R.id.menuItemDelete:
-                    deletePersonAndReloadData(p);
-                    Toast.makeText(PeopleActivity.this, R.string.successfully_deleted, Toast.LENGTH_SHORT).show();
+                    deletePersonAndReloadData(p, selectedPosition);
                     mode.finish();
                     return true;
                 case R.id.menuItemChange:
@@ -93,15 +94,30 @@ public class PeopleActivity extends AppCompatActivity {
         setListViewPeople();
     }
 
-    private void deletePersonAndReloadData(final Person p){
-        AsyncTask.execute(new Runnable() {
+    private void deletePersonAndReloadData(final Person p, final int position){
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                VacinemeDatabase.getDatabase(PeopleActivity.this).personDAO().delete(p);
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                VacinemeDatabase.getDatabase(PeopleActivity.this).personDAO().delete(p);
+                            }
+                        });
+                        peopleRoom.remove(position);
+                        loadDataFromPeople();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                }
             }
-        });
-        peopleRoom.remove(selectedPosition);
-        loadDataFromPeople();
+        };
+        AlertsUtil.confirmation(this, getString(R.string.do_you_really_want_to_delete_this_person), listener);
+    }
+
+    private void deletePerson(final Person p){
+
     }
 
     private void loadDataFromPeople(){

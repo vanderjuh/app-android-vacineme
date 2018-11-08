@@ -1,6 +1,8 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
@@ -21,6 +23,7 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.activities.adapters.VaccinesListViewAdapter;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.AlertsUtil;
 
 public class VaccinesActivity extends AppCompatActivity {
 
@@ -53,8 +56,7 @@ public class VaccinesActivity extends AppCompatActivity {
             Vaccine v = vaccinesRoom.get(selectedPosition);
             switch (item.getItemId()) {
                 case R.id.menuItemDelete:
-                    deleteVaccineAndReloadData(v);
-                    Toast.makeText(VaccinesActivity.this, R.string.successfully_deleted, Toast.LENGTH_SHORT).show();
+                    deleteVaccineAndReloadData(v, selectedPosition);
                     mode.finish();
                     return true;
                 case R.id.menuItemChange:
@@ -93,15 +95,35 @@ public class VaccinesActivity extends AppCompatActivity {
         setListViewPeople();
     }
 
-    private void deleteVaccineAndReloadData(final Vaccine v){
-        AsyncTask.execute(new Runnable() {
+    private void deleteVaccineAndReloadData(final Vaccine v, final int position){
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                VacinemeDatabase.getDatabase(VaccinesActivity.this).vaccineDAO().delete(v);
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    VacinemeDatabase.getDatabase(VaccinesActivity.this).vaccineDAO().delete(v);
+                                }catch (SQLiteConstraintException e){
+                                    VaccinesActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AlertsUtil.alert(VaccinesActivity.this, getString(R.string.this_vaccine_is_being_used));
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        vaccinesRoom.remove(position);
+                        loadDataFromVaccines();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                }
             }
-        });
-        vaccinesRoom.remove(selectedPosition);
-        loadDataFromVaccines();
+        };
+        AlertsUtil.confirmation(this, getString(R.string.do_you_really_want_to_delete_this_vaccine), listener);
     }
 
     private void loadDataFromVaccines(){

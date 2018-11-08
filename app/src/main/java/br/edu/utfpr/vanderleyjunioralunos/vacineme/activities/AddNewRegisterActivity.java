@@ -1,6 +1,7 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
@@ -27,6 +28,7 @@ import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Person;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Register;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.AlertsUtil;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.DateUtil;
 
 public class AddNewRegisterActivity extends AppCompatActivity {
@@ -254,13 +256,24 @@ public class AddNewRegisterActivity extends AppCompatActivity {
     }
 
     private void deleteRegister(){
-        AsyncTask.execute(new Runnable() {
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                VacinemeDatabase.getDatabase(AddNewRegisterActivity.this).registerDAO().delete(register);
-                setResult(RESULT_OK);
-                finish();
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                VacinemeDatabase.getDatabase(AddNewRegisterActivity.this).registerDAO().delete(register);
+                                setResult(RESULT_OK);
+                                finish();
+                            }
+                        });
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                }
             }
-        });
+        };
+        AlertsUtil.confirmation(this, getString(R.string.do_you_really_want_to_delete_this_register), listener);
     }
 }

@@ -1,6 +1,8 @@
 package br.edu.utfpr.vanderleyjunioralunos.vacineme.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.R;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.models.Vaccine;
 import br.edu.utfpr.vanderleyjunioralunos.vacineme.persistence.VacinemeDatabase;
+import br.edu.utfpr.vanderleyjunioralunos.vacineme.utils.AlertsUtil;
 
 public class AddNewVaccineActivity extends AppCompatActivity {
 
@@ -84,14 +87,34 @@ public class AddNewVaccineActivity extends AppCompatActivity {
     }
 
     private void deleteVaccine(final Vaccine v){
-        AsyncTask.execute(new Runnable() {
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void run() {
-                VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().delete(v);
-                setResult(RESULT_OK);
-                finish();
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    VacinemeDatabase.getDatabase(AddNewVaccineActivity.this).vaccineDAO().delete(v);
+                                    setResult(RESULT_OK);
+                                    finish();
+                                }catch(SQLiteConstraintException e){
+                                    AddNewVaccineActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AlertsUtil.alert(AddNewVaccineActivity.this, getString(R.string.this_vaccine_is_being_used));
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                }
             }
-        });
+        };
+        AlertsUtil.confirmation(this, getString(R.string.do_you_really_want_to_delete_this_vaccine), listener);
     }
 
     private void setValuesForm(Vaccine v){
