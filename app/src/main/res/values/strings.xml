@@ -104,7 +104,7 @@
     <string name="do_you_really_want_to_delete_this_register">Do you really want to delete this register?</string>
     <string name="do_you_really_want_to_delete_this_vaccine">Do you really want to delete this vaccine?</string>
     <string name="alert">Alert</string>
-    <string name="ok">Ok</string>
+    <string name="ok" translatable="false">Ok</string>
     <string name="this_vaccine_is_being_used">This vaccine is being used</string>
 
 </resources>

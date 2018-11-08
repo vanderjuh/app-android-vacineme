@@ -92,4 +92,16 @@
         <item>@drawable/ic_avo_m</item>
         <item>@drawable/ic_pet</item>
     </string-array>
+    <string name="no_vaccines_found">Nenhuma vacina encontrada</string>
+    <string name="edit_vaccine">Editar vacina</string>
+    <string name="edit_register">Editar registro</string>
+    <string name="save">Salvar</string>
+    <string name="confirmation">Confirmaçao</string>
+    <string name="no">Não</string>
+    <string name="yes">Sim</string>
+    <string name="do_you_really_want_to_delete_this_person">Você realmente quer deletar esta pessoa?</string>
+    <string name="do_you_really_want_to_delete_this_register">Você realmente quer deletar este registro?</string>
+    <string name="do_you_really_want_to_delete_this_vaccine">Você realmente quer deletar esta vacina?</string>
+    <string name="alert">Alerta</string>
+    <string name="this_vaccine_is_being_used">Está vacina está sendo usada</string>
 </resources>
