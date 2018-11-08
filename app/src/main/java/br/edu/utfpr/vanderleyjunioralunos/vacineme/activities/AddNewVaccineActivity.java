@@ -56,7 +56,6 @@ public class AddNewVaccineActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(!verifyIntentMode(getIntent())){
             menu.getItem(0).setVisible(false);
-            menu.getItem(0).setEnabled(false);
         }
         return super.onPrepareOptionsMenu(menu);
     }

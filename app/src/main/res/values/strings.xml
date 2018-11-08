@@ -95,5 +95,7 @@
     <string name="save_changes">Save changes</string>
     <string name="no_vaccines_found">No vaccines found</string>
     <string name="edit_vaccine">Edit vaccine</string>
+    <string name="edit_register">Edit register</string>
+    <string name="save">Save</string>
 
 </resources>

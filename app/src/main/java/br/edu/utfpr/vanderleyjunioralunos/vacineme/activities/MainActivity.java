@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     public static int countVaccines;
     private int INSERT_PERSON_MODE = 1;
     private int INSERT_REGISTER_MODE = 2;
+    public static String VACCINE_ID = "VACCINE_ID";
+    public static String PERSON_ID = "PERSON_ID";
 
     //SharedPreferences
     private final String SELECTED_PERSON = "SELECTED_PERSON";
@@ -66,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
                     public void onNothingSelected(AdapterView<?> parent) {}
                 }
         );
+    }
+
+    private void setEventListViewRegisters(){
+        listViewRegisters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentMenu;
+                intentMenu = new Intent(MainActivity.this, AddNewRegisterActivity.class);
+                Register r = registers.get(position);
+                intentMenu.putExtra(VACCINE_ID, r.getVaccineId());
+                intentMenu.putExtra(PERSON_ID, r.getPersonId());
+                intentMenu.putExtra(PERSON_POSITION, spinnerPeople.getSelectedItemPosition());
+                startActivityForResult(intentMenu, INSERT_REGISTER_MODE);
+            }
+        });
     }
 
     private void savePreferences(){
@@ -127,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             registerAdapter = new RegisterAdapter(MainActivity.this, registers);
                             listViewRegisters.setAdapter(registerAdapter);
+                            setEventListViewRegisters();
                         }
                     });
                 }

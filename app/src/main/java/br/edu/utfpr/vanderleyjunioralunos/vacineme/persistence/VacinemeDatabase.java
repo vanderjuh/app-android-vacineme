@@ -31,7 +31,7 @@ public abstract class VacinemeDatabase extends RoomDatabase {
         if(instance == null){
             synchronized (VacinemeDatabase.class){
                 if(instance == null){
-                    Builder builder = Room.databaseBuilder(context, VacinemeDatabase.class, "vacineme2.db");
+                    Builder builder = Room.databaseBuilder(context, VacinemeDatabase.class, "vacineme3.db");
                     builder.addCallback(new Callback() {
                         @Override
                         public void onCreate(@NonNull SupportSQLiteDatabase db) {

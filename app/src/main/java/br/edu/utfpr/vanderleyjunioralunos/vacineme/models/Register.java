@@ -3,18 +3,25 @@ package br.edu.utfpr.vanderleyjunioralunos.vacineme.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "registers", primaryKeys = {"vaccineId", "personId"}, foreignKeys = {
+@Entity(tableName = "registers", foreignKeys = {
         @ForeignKey(entity = Vaccine.class, parentColumns = "id", childColumns = "vaccineId"),
         @ForeignKey(entity = Person.class, parentColumns = "id", childColumns = "personId", onDelete = CASCADE)})
 public class Register {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @NonNull
     private int vaccineId;
+
+    @NonNull
     private int personId;
 
     @Ignore
@@ -33,19 +40,29 @@ public class Register {
         this.nextDateVaccine = nextDateVaccine;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
     public int getVaccineId() {
         return vaccineId;
     }
 
-    public void setVaccineId(int vaccineId) {
+    public void setVaccineId(@NonNull int vaccineId) {
         this.vaccineId = vaccineId;
     }
 
+    @NonNull
     public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(@NonNull int personId) {
         this.personId = personId;
     }
 
